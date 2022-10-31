@@ -47,4 +47,8 @@ int escribir(char *texto, unsigned int longi){
 int obtener_id_pr(){
    return llamsis(ID_PROCESO, 0);
 }
+/*I. Funcion que duerme el proceso */
+int dormir(unsigned int segundos){
+   return llamsis(DORMIR, 1, segundos);
+}
 

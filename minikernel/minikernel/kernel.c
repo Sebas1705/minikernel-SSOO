@@ -332,6 +332,12 @@ int sis_obtener_id_pr(){
 	return p_proc_actual->id;
 }
 
+/*I. Funcion que duerme el proceso */
+int sis_dormir(){
+	//Leemos el registro en el que se encuentra los segundos
+	int segs = (int)leer_registro(1);
+}
+
 /*
  *
  * Rutina de inicializaci�n invocada en arranque

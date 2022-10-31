@@ -44,29 +44,11 @@ ALGO COMENTE ESTA PARTE Y DESCOMENTE LA PRUEBA CORRESPONDIENTE */
 	if (crear_proceso("noexiste")<0)
 		printf("Error creando noexiste\n");
 	*/
-	/* PRUEBA DE LA LLAMADA OBTENER_ID_PR */
+
+/* PRUEBA DE LA LLAMADA OBTENER_ID_PR 
 	if (crear_proceso("prueba")<0)
 		printf("Error creando prueba\n");
-
-	printf("init: termina\n");
-	return 0; 
-}
-
-/* FIN PRUEBA INICIAL */
-
-/* PRUEBA DE LA LLAMADA OBTENER_ID_PR */
-void pruebasID(){
-	printf("pruebasID: comienza\n");
-    int i;
-    for (i=1; i<=2; i++){
-        if (crear_proceso("yosoy")<0)                  
-			printf("Error creando yosoy\n");
-		else 
-			printf("PROCCESS ID: %d\n",obtener_id_pr());
-	}
-	printf("pruebasID: termina\n");
-}
-/**/
+*/
 
 /* PRUEBA DE LA LLAMADA DORMIR
 	if (crear_proceso("prueba_dormir")<0)
@@ -97,5 +79,11 @@ void pruebasID(){
 	if (crear_proceso("prueba_term")<0)
 		printf("Error creando prueba_term\n");
 */
+
+	printf("init: termina\n");
+	return 0; 
+}
+
+/* FIN PRUEBA INICIAL */
 
 

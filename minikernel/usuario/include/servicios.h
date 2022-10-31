@@ -31,6 +31,8 @@ int terminar_proceso();
 int escribir(char *texto, unsigned int longi);
 /*I. Funcion que devuelve el identificador de un proceso */
 int obtener_id_pr();
+/*I. Funcion que duerme el proceso */
+int dormir(unsigned int segundos);
 
 #endif /* SERVICIOS_H */
 
