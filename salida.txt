@@ -515,7 +515,6 @@ yosoy (0): i 500
 yosoy (0): i 501
 yosoy (0): i 502
 yosoy (0): i 503
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 504
 yosoy (0): i 505
 yosoy (0): i 506
@@ -1065,7 +1064,6 @@ yosoy (0): i 1049
 yosoy (0): i 1050
 yosoy (0): i 1051
 yosoy (0): i 1052
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 1053
 yosoy (0): i 1054
 yosoy (0): i 1055
@@ -1589,7 +1587,6 @@ yosoy (0): i 1572
 yosoy (0): i 1573
 yosoy (0): i 1574
 yosoy (0): i 1575
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 1576
 yosoy (0): i 1577
 yosoy (0): i 1578
@@ -2067,7 +2064,6 @@ yosoy (0): i 2049
 yosoy (0): i 2050
 yosoy (0): i 2051
 yosoy (0): i 2052
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 2053
 yosoy (0): i 2054
 yosoy (0): i 2055
@@ -2709,7 +2705,6 @@ yosoy (0): i 2690
 yosoy (0): i 2691
 yosoy (0): i 2692
 yosoy (0): i 2693
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 2694
 yosoy (0): i 2695
 yosoy (0): i 2696
@@ -3238,7 +3233,6 @@ yosoy (0): i 3218
 yosoy (0): i 3219
 yosoy (0): i 3220
 yosoy (0): i 3221
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 3222
 yosoy (0): i 3223
 yosoy (0): i 3224
@@ -3739,7 +3733,6 @@ yosoy (0): i 3718
 yosoy (0): i 3719
 yosoy (0): i 3720
 yosoy (0): i 3721
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 3722
 yosoy (0): i 3723
 yosoy (0): i 3724
@@ -3869,6 +3862,7 @@ yosoy (0): i 3847
 yosoy (0): i 3848
 yosoy (0): i 3849
 yosoy (0): i 3850
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 3851
 yosoy (0): i 3852
 yosoy (0): i 3853
@@ -4177,7 +4171,6 @@ yosoy (0): i 4155
 yosoy (0): i 4156
 yosoy (0): i 4157
 yosoy (0): i 4158
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 4159
 yosoy (0): i 4160
 yosoy (0): i 4161
@@ -4562,7 +4555,6 @@ yosoy (0): i 4539
 yosoy (0): i 4540
 yosoy (0): i 4541
 yosoy (0): i 4542
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 4543
 yosoy (0): i 4544
 yosoy (0): i 4545
@@ -5171,7 +5163,6 @@ yosoy (0): i 5147
 yosoy (0): i 5148
 yosoy (0): i 5149
 yosoy (0): i 5150
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 5151
 yosoy (0): i 5152
 yosoy (0): i 5153
@@ -5914,7 +5905,6 @@ yosoy (0): i 5889
 yosoy (0): i 5890
 yosoy (0): i 5891
 yosoy (0): i 5892
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 5893
 yosoy (0): i 5894
 yosoy (0): i 5895
@@ -6516,7 +6506,6 @@ yosoy (0): i 6490
 yosoy (0): i 6491
 yosoy (0): i 6492
 yosoy (0): i 6493
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 6494
 yosoy (0): i 6495
 yosoy (0): i 6496
@@ -7101,7 +7090,6 @@ yosoy (0): i 7074
 yosoy (0): i 7075
 yosoy (0): i 7076
 yosoy (0): i 7077
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 7078
 yosoy (0): i 7079
 yosoy (0): i 7080
@@ -7815,6 +7803,7 @@ yosoy (0): i 7787
 yosoy (0): i 7788
 yosoy (0): i 7789
 yosoy (0): i 7790
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 7791
 yosoy (0): i 7792
 yosoy (0): i 7793
@@ -7875,7 +7864,6 @@ yosoy (0): i 7847
 yosoy (0): i 7848
 yosoy (0): i 7849
 yosoy (0): i 7850
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 7851
 yosoy (0): i 7852
 yosoy (0): i 7853
@@ -8396,7 +8384,6 @@ yosoy (0): i 8367
 yosoy (0): i 8368
 yosoy (0): i 8369
 yosoy (0): i 8370
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 8371
 yosoy (0): i 8372
 yosoy (0): i 8373
@@ -9327,7 +9314,6 @@ yosoy (0): i 9297
 yosoy (0): i 9298
 yosoy (0): i 9299
 yosoy (0): i 9300
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 9301
 yosoy (0): i 9302
 yosoy (0): i 9303
@@ -9991,7 +9977,6 @@ yosoy (0): i 9960
 yosoy (0): i 9961
 yosoy (0): i 9962
 yosoy (0): i 9963
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 9964
 yosoy (0): i 9965
 yosoy (0): i 9966
@@ -10438,7 +10423,6 @@ yosoy (0): i 10406
 yosoy (0): i 10407
 yosoy (0): i 10408
 yosoy (0): i 10409
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 10410
 yosoy (0): i 10411
 yosoy (0): i 10412
@@ -11118,7 +11102,6 @@ yosoy (0): i 11085
 yosoy (0): i 11086
 yosoy (0): i 11087
 yosoy (0): i 11088
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 11089
 yosoy (0): i 11090
 yosoy (0): i 11091
@@ -11566,7 +11549,6 @@ yosoy (0): i 11532
 yosoy (0): i 11533
 yosoy (0): i 11534
 yosoy (0): i 11535
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 11536
 yosoy (0): i 11537
 yosoy (0): i 11538
@@ -11745,6 +11727,7 @@ yosoy (0): i 11710
 yosoy (0): i 11711
 yosoy (0): i 11712
 yosoy (0): i 11713
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 11714
 yosoy (0): i 11715
 yosoy (0): i 11716
@@ -11970,7 +11953,6 @@ yosoy (0): i 11935
 yosoy (0): i 11936
 yosoy (0): i 11937
 yosoy (0): i 11938
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 11939
 yosoy (0): i 11940
 yosoy (0): i 11941
@@ -12530,7 +12512,6 @@ yosoy (0): i 12494
 yosoy (0): i 12495
 yosoy (0): i 12496
 yosoy (0): i 12497
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 12498
 yosoy (0): i 12499
 yosoy (0): i 12500
@@ -13057,7 +13038,6 @@ yosoy (0): i 13020
 yosoy (0): i 13021
 yosoy (0): i 13022
 yosoy (0): i 13023
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 13024
 yosoy (0): i 13025
 yosoy (0): i 13026
@@ -13611,7 +13591,6 @@ yosoy (0): i 13573
 yosoy (0): i 13574
 yosoy (0): i 13575
 yosoy (0): i 13576
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 13577
 yosoy (0): i 13578
 yosoy (0): i 13579
@@ -14787,7 +14766,6 @@ yosoy (0): i 14748
 yosoy (0): i 14749
 yosoy (0): i 14750
 yosoy (0): i 14751
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 14752
 yosoy (0): i 14753
 yosoy (0): i 14754
@@ -15402,7 +15380,6 @@ yosoy (0): i 15362
 yosoy (0): i 15363
 yosoy (0): i 15364
 yosoy (0): i 15365
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 15366
 yosoy (0): i 15367
 yosoy (0): i 15368
@@ -15644,6 +15621,7 @@ yosoy (0): i 15603
 yosoy (0): i 15604
 yosoy (0): i 15605
 yosoy (0): i 15606
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 15607
 yosoy (0): i 15608
 yosoy (0): i 15609
@@ -15876,7 +15854,6 @@ yosoy (0): i 15835
 yosoy (0): i 15836
 yosoy (0): i 15837
 yosoy (0): i 15838
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 15839
 yosoy (0): i 15840
 yosoy (0): i 15841
@@ -16445,7 +16422,6 @@ yosoy (0): i 16403
 yosoy (0): i 16404
 yosoy (0): i 16405
 yosoy (0): i 16406
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 16407
 yosoy (0): i 16408
 yosoy (0): i 16409
@@ -16987,7 +16963,6 @@ yosoy (0): i 16944
 yosoy (0): i 16945
 yosoy (0): i 16946
 yosoy (0): i 16947
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 16948
 yosoy (0): i 16949
 yosoy (0): i 16950
@@ -17448,7 +17423,6 @@ yosoy (0): i 17404
 yosoy (0): i 17405
 yosoy (0): i 17406
 yosoy (0): i 17407
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 17408
 yosoy (0): i 17409
 yosoy (0): i 17410
@@ -17912,7 +17886,6 @@ yosoy (0): i 17867
 yosoy (0): i 17868
 yosoy (0): i 17869
 yosoy (0): i 17870
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 17871
 yosoy (0): i 17872
 yosoy (0): i 17873
@@ -18360,7 +18333,6 @@ yosoy (0): i 18314
 yosoy (0): i 18315
 yosoy (0): i 18316
 yosoy (0): i 18317
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 18318
 yosoy (0): i 18319
 yosoy (0): i 18320
@@ -18752,7 +18724,6 @@ yosoy (0): i 18705
 yosoy (0): i 18706
 yosoy (0): i 18707
 yosoy (0): i 18708
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 18709
 yosoy (0): i 18710
 yosoy (0): i 18711
@@ -19524,7 +19495,6 @@ yosoy (0): i 19476
 yosoy (0): i 19477
 yosoy (0): i 19478
 yosoy (0): i 19479
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 19480
 yosoy (0): i 19481
 yosoy (0): i 19482
@@ -19610,6 +19580,7 @@ yosoy (0): i 19561
 yosoy (0): i 19562
 yosoy (0): i 19563
 yosoy (0): i 19564
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 19565
 yosoy (0): i 19566
 yosoy (0): i 19567
@@ -20154,7 +20125,6 @@ yosoy (0): i 20105
 yosoy (0): i 20106
 yosoy (0): i 20107
 yosoy (0): i 20108
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 20109
 yosoy (0): i 20110
 yosoy (0): i 20111
@@ -20672,7 +20642,6 @@ yosoy (0): i 20622
 yosoy (0): i 20623
 yosoy (0): i 20624
 yosoy (0): i 20625
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 20626
 yosoy (0): i 20627
 yosoy (0): i 20628
@@ -21264,7 +21233,6 @@ yosoy (0): i 21213
 yosoy (0): i 21214
 yosoy (0): i 21215
 yosoy (0): i 21216
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 21217
 yosoy (0): i 21218
 yosoy (0): i 21219
@@ -21711,7 +21679,6 @@ yosoy (0): i 21659
 yosoy (0): i 21660
 yosoy (0): i 21661
 yosoy (0): i 21662
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 21663
 yosoy (0): i 21664
 yosoy (0): i 21665
@@ -22293,7 +22260,6 @@ yosoy (0): i 22240
 yosoy (0): i 22241
 yosoy (0): i 22242
 yosoy (0): i 22243
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 22244
 yosoy (0): i 22245
 yosoy (0): i 22246
@@ -22813,7 +22779,6 @@ yosoy (0): i 22759
 yosoy (0): i 22760
 yosoy (0): i 22761
 yosoy (0): i 22762
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 22763
 yosoy (0): i 22764
 yosoy (0): i 22765
@@ -23262,7 +23227,6 @@ yosoy (0): i 23207
 yosoy (0): i 23208
 yosoy (0): i 23209
 yosoy (0): i 23210
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 23211
 yosoy (0): i 23212
 yosoy (0): i 23213
@@ -23594,6 +23558,7 @@ yosoy (0): i 23538
 yosoy (0): i 23539
 yosoy (0): i 23540
 yosoy (0): i 23541
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 23542
 yosoy (0): i 23543
 yosoy (0): i 23544
@@ -23667,7 +23632,6 @@ yosoy (0): i 23611
 yosoy (0): i 23612
 yosoy (0): i 23613
 yosoy (0): i 23614
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 23615
 yosoy (0): i 23616
 yosoy (0): i 23617
@@ -24858,7 +24822,6 @@ yosoy (0): i 24801
 yosoy (0): i 24802
 yosoy (0): i 24803
 yosoy (0): i 24804
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 24805
 yosoy (0): i 24806
 yosoy (0): i 24807
@@ -25461,7 +25424,6 @@ yosoy (0): i 25403
 yosoy (0): i 25404
 yosoy (0): i 25405
 yosoy (0): i 25406
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 25407
 yosoy (0): i 25408
 yosoy (0): i 25409
@@ -26058,7 +26020,6 @@ yosoy (0): i 25999
 yosoy (0): i 26000
 yosoy (0): i 26001
 yosoy (0): i 26002
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 26003
 yosoy (0): i 26004
 yosoy (0): i 26005
@@ -26610,7 +26571,6 @@ yosoy (0): i 26550
 yosoy (0): i 26551
 yosoy (0): i 26552
 yosoy (0): i 26553
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 26554
 yosoy (0): i 26555
 yosoy (0): i 26556
@@ -27013,7 +26973,6 @@ yosoy (0): i 26952
 yosoy (0): i 26953
 yosoy (0): i 26954
 yosoy (0): i 26955
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 26956
 yosoy (0): i 26957
 yosoy (0): i 26958
@@ -27558,6 +27517,7 @@ yosoy (0): i 27496
 yosoy (0): i 27497
 yosoy (0): i 27498
 yosoy (0): i 27499
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 27500
 yosoy (0): i 27501
 yosoy (0): i 27502
@@ -27605,7 +27565,6 @@ yosoy (0): i 27543
 yosoy (0): i 27544
 yosoy (0): i 27545
 yosoy (0): i 27546
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 27547
 yosoy (0): i 27548
 yosoy (0): i 27549
@@ -28352,7 +28311,6 @@ yosoy (0): i 28289
 yosoy (0): i 28290
 yosoy (0): i 28291
 yosoy (0): i 28292
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 28293
 yosoy (0): i 28294
 yosoy (0): i 28295
@@ -28880,7 +28838,6 @@ yosoy (0): i 28816
 yosoy (0): i 28817
 yosoy (0): i 28818
 yosoy (0): i 28819
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 28820
 yosoy (0): i 28821
 yosoy (0): i 28822
@@ -29479,7 +29436,6 @@ yosoy (0): i 29414
 yosoy (0): i 29415
 yosoy (0): i 29416
 yosoy (0): i 29417
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 29418
 yosoy (0): i 29419
 yosoy (0): i 29420
@@ -30127,7 +30083,6 @@ yosoy (0): i 30061
 yosoy (0): i 30062
 yosoy (0): i 30063
 yosoy (0): i 30064
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 30065
 yosoy (0): i 30066
 yosoy (0): i 30067
@@ -30731,7 +30686,6 @@ yosoy (0): i 30664
 yosoy (0): i 30665
 yosoy (0): i 30666
 yosoy (0): i 30667
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 30668
 yosoy (0): i 30669
 yosoy (0): i 30670
@@ -31525,12 +31479,12 @@ yosoy (0): i 31457
 yosoy (0): i 31458
 yosoy (0): i 31459
 yosoy (0): i 31460
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 31461
 yosoy (0): i 31462
 yosoy (0): i 31463
 yosoy (0): i 31464
 yosoy (0): i 31465
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 31466
 yosoy (0): i 31467
 yosoy (0): i 31468
@@ -32112,7 +32066,6 @@ yosoy (0): i 32043
 yosoy (0): i 32044
 yosoy (0): i 32045
 yosoy (0): i 32046
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 32047
 yosoy (0): i 32048
 yosoy (0): i 32049
@@ -32957,7 +32910,6 @@ yosoy (0): i 32887
 yosoy (0): i 32888
 yosoy (0): i 32889
 yosoy (0): i 32890
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 32891
 yosoy (0): i 32892
 yosoy (0): i 32893
@@ -33493,7 +33445,6 @@ yosoy (0): i 33422
 yosoy (0): i 33423
 yosoy (0): i 33424
 yosoy (0): i 33425
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 33426
 yosoy (0): i 33427
 yosoy (0): i 33428
@@ -33984,7 +33935,6 @@ yosoy (0): i 33912
 yosoy (0): i 33913
 yosoy (0): i 33914
 yosoy (0): i 33915
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 33916
 yosoy (0): i 33917
 yosoy (0): i 33918
@@ -34539,7 +34489,6 @@ yosoy (0): i 34466
 yosoy (0): i 34467
 yosoy (0): i 34468
 yosoy (0): i 34469
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 34470
 yosoy (0): i 34471
 yosoy (0): i 34472
@@ -35271,7 +35220,6 @@ yosoy (0): i 35197
 yosoy (0): i 35198
 yosoy (0): i 35199
 yosoy (0): i 35200
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 35201
 yosoy (0): i 35202
 yosoy (0): i 35203
@@ -35482,6 +35430,7 @@ yosoy (0): i 35407
 yosoy (0): i 35408
 yosoy (0): i 35409
 yosoy (0): i 35410
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 35411
 yosoy (0): i 35412
 yosoy (0): i 35413
@@ -36088,7 +36037,6 @@ yosoy (0): i 36013
 yosoy (0): i 36014
 yosoy (0): i 36015
 yosoy (0): i 36016
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 36017
 yosoy (0): i 36018
 yosoy (0): i 36019
@@ -36655,7 +36603,6 @@ yosoy (0): i 36579
 yosoy (0): i 36580
 yosoy (0): i 36581
 yosoy (0): i 36582
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 36583
 yosoy (0): i 36584
 yosoy (0): i 36585
@@ -37176,7 +37123,6 @@ yosoy (0): i 37099
 yosoy (0): i 37100
 yosoy (0): i 37101
 yosoy (0): i 37102
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 37103
 yosoy (0): i 37104
 yosoy (0): i 37105
@@ -38265,7 +38211,6 @@ yosoy (0): i 38187
 yosoy (0): i 38188
 yosoy (0): i 38189
 yosoy (0): i 38190
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 38191
 yosoy (0): i 38192
 yosoy (0): i 38193
@@ -39093,7 +39038,6 @@ yosoy (0): i 39014
 yosoy (0): i 39015
 yosoy (0): i 39016
 yosoy (0): i 39017
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 39018
 yosoy (0): i 39019
 yosoy (0): i 39020
@@ -39455,6 +39399,7 @@ yosoy (0): i 39375
 yosoy (0): i 39376
 yosoy (0): i 39377
 yosoy (0): i 39378
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 39379
 yosoy (0): i 39380
 yosoy (0): i 39381
@@ -39779,7 +39724,6 @@ yosoy (0): i 39699
 yosoy (0): i 39700
 yosoy (0): i 39701
 yosoy (0): i 39702
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 39703
 yosoy (0): i 39704
 yosoy (0): i 39705
@@ -40204,7 +40148,6 @@ yosoy (0): i 40123
 yosoy (0): i 40124
 yosoy (0): i 40125
 yosoy (0): i 40126
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 40127
 yosoy (0): i 40128
 yosoy (0): i 40129
@@ -40807,7 +40750,6 @@ yosoy (0): i 40725
 yosoy (0): i 40726
 yosoy (0): i 40727
 yosoy (0): i 40728
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 40729
 yosoy (0): i 40730
 yosoy (0): i 40731
@@ -41408,7 +41350,6 @@ yosoy (0): i 41325
 yosoy (0): i 41326
 yosoy (0): i 41327
 yosoy (0): i 41328
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 41329
 yosoy (0): i 41330
 yosoy (0): i 41331
@@ -42733,7 +42674,6 @@ yosoy (0): i 42649
 yosoy (0): i 42650
 yosoy (0): i 42651
 yosoy (0): i 42652
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 42653
 yosoy (0): i 42654
 yosoy (0): i 42655
@@ -43376,7 +43316,6 @@ yosoy (0): i 43291
 yosoy (0): i 43292
 yosoy (0): i 43293
 yosoy (0): i 43294
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 43295
 yosoy (0): i 43296
 yosoy (0): i 43297
@@ -43467,6 +43406,7 @@ yosoy (0): i 43381
 yosoy (0): i 43382
 yosoy (0): i 43383
 yosoy (0): i 43384
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 43385
 yosoy (0): i 43386
 yosoy (0): i 43387
@@ -44263,7 +44203,6 @@ yosoy (0): i 44177
 yosoy (0): i 44178
 yosoy (0): i 44179
 yosoy (0): i 44180
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 44181
 yosoy (0): i 44182
 yosoy (0): i 44183
@@ -45055,7 +44994,6 @@ yosoy (0): i 44968
 yosoy (0): i 44969
 yosoy (0): i 44970
 yosoy (0): i 44971
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 44972
 yosoy (0): i 44973
 yosoy (0): i 44974
@@ -45660,7 +45598,6 @@ yosoy (0): i 45572
 yosoy (0): i 45573
 yosoy (0): i 45574
 yosoy (0): i 45575
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 45576
 yosoy (0): i 45577
 yosoy (0): i 45578
@@ -46480,7 +46417,6 @@ yosoy (0): i 46391
 yosoy (0): i 46392
 yosoy (0): i 46393
 yosoy (0): i 46394
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 46395
 yosoy (0): i 46396
 yosoy (0): i 46397
@@ -47450,7 +47386,6 @@ yosoy (0): i 47360
 yosoy (0): i 47361
 yosoy (0): i 47362
 yosoy (0): i 47363
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 47364
 yosoy (0): i 47365
 yosoy (0): i 47366
@@ -47473,6 +47408,7 @@ yosoy (0): i 47382
 yosoy (0): i 47383
 yosoy (0): i 47384
 yosoy (0): i 47385
+-> TRATANDO INT. DE RELOJ
 yosoy (0): i 47386
 yosoy (0): i 47387
 yosoy (0): i 47388
@@ -47960,7 +47896,6 @@ yosoy (0): i 47869
 yosoy (0): i 47870
 yosoy (0): i 47871
 yosoy (0): i 47872
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 47873
 yosoy (0): i 47874
 yosoy (0): i 47875
@@ -48344,7 +48279,6 @@ yosoy (0): i 48252
 yosoy (0): i 48253
 yosoy (0): i 48254
 yosoy (0): i 48255
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 48256
 yosoy (0): i 48257
 yosoy (0): i 48258
@@ -49179,7 +49113,6 @@ yosoy (0): i 49086
 yosoy (0): i 49087
 yosoy (0): i 49088
 yosoy (0): i 49089
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 49090
 yosoy (0): i 49091
 yosoy (0): i 49092
@@ -49702,7 +49635,6 @@ yosoy (0): i 49608
 yosoy (0): i 49609
 yosoy (0): i 49610
 yosoy (0): i 49611
--> TRATANDO INT. DE RELOJ
 yosoy (0): i 49612
 yosoy (0): i 49613
 yosoy (0): i 49614
@@ -50157,7 +50089,6 @@ yosoy (2): i 59
 yosoy (2): i 60
 yosoy (2): i 61
 yosoy (2): i 62
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 63
 yosoy (2): i 64
 yosoy (2): i 65
@@ -51101,7 +51032,6 @@ yosoy (2): i 1002
 yosoy (2): i 1003
 yosoy (2): i 1004
 yosoy (2): i 1005
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 1006
 yosoy (2): i 1007
 yosoy (2): i 1008
@@ -51485,6 +51415,7 @@ yosoy (2): i 1385
 yosoy (2): i 1386
 yosoy (2): i 1387
 yosoy (2): i 1388
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 1389
 yosoy (2): i 1390
 yosoy (2): i 1391
@@ -51761,7 +51692,6 @@ yosoy (2): i 1661
 yosoy (2): i 1662
 yosoy (2): i 1663
 yosoy (2): i 1664
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 1665
 yosoy (2): i 1666
 yosoy (2): i 1667
@@ -52576,7 +52506,6 @@ yosoy (2): i 2475
 yosoy (2): i 2476
 yosoy (2): i 2477
 yosoy (2): i 2478
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 2479
 yosoy (2): i 2480
 yosoy (2): i 2481
@@ -53149,7 +53078,6 @@ yosoy (2): i 3047
 yosoy (2): i 3048
 yosoy (2): i 3049
 yosoy (2): i 3050
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 3051
 yosoy (2): i 3052
 yosoy (2): i 3053
@@ -53577,7 +53505,6 @@ yosoy (2): i 3474
 yosoy (2): i 3475
 yosoy (2): i 3476
 yosoy (2): i 3477
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 3478
 yosoy (2): i 3479
 yosoy (2): i 3480
@@ -54121,7 +54048,6 @@ yosoy (2): i 4017
 yosoy (2): i 4018
 yosoy (2): i 4019
 yosoy (2): i 4020
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 4021
 yosoy (2): i 4022
 yosoy (2): i 4023
@@ -54813,7 +54739,6 @@ yosoy (2): i 4708
 yosoy (2): i 4709
 yosoy (2): i 4710
 yosoy (2): i 4711
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 4712
 yosoy (2): i 4713
 yosoy (2): i 4714
@@ -55371,6 +55296,7 @@ yosoy (2): i 5265
 yosoy (2): i 5266
 yosoy (2): i 5267
 yosoy (2): i 5268
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 5269
 yosoy (2): i 5270
 yosoy (2): i 5271
@@ -55432,7 +55358,6 @@ yosoy (2): i 5326
 yosoy (2): i 5327
 yosoy (2): i 5328
 yosoy (2): i 5329
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 5330
 yosoy (2): i 5331
 yosoy (2): i 5332
@@ -56174,7 +56099,6 @@ yosoy (2): i 6067
 yosoy (2): i 6068
 yosoy (2): i 6069
 yosoy (2): i 6070
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 6071
 yosoy (2): i 6072
 yosoy (2): i 6073
@@ -56634,7 +56558,6 @@ yosoy (2): i 6526
 yosoy (2): i 6527
 yosoy (2): i 6528
 yosoy (2): i 6529
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 6530
 yosoy (2): i 6531
 yosoy (2): i 6532
@@ -57095,7 +57018,6 @@ yosoy (2): i 6986
 yosoy (2): i 6987
 yosoy (2): i 6988
 yosoy (2): i 6989
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 6990
 yosoy (2): i 6991
 yosoy (2): i 6992
@@ -57615,7 +57537,6 @@ yosoy (2): i 7505
 yosoy (2): i 7506
 yosoy (2): i 7507
 yosoy (2): i 7508
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 7509
 yosoy (2): i 7510
 yosoy (2): i 7511
@@ -58023,7 +57944,6 @@ yosoy (2): i 7912
 yosoy (2): i 7913
 yosoy (2): i 7914
 yosoy (2): i 7915
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 7916
 yosoy (2): i 7917
 yosoy (2): i 7918
@@ -58499,7 +58419,6 @@ yosoy (2): i 8387
 yosoy (2): i 8388
 yosoy (2): i 8389
 yosoy (2): i 8390
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 8391
 yosoy (2): i 8392
 yosoy (2): i 8393
@@ -58996,7 +58915,6 @@ yosoy (2): i 8883
 yosoy (2): i 8884
 yosoy (2): i 8885
 yosoy (2): i 8886
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 8887
 yosoy (2): i 8888
 yosoy (2): i 8889
@@ -59191,6 +59109,7 @@ yosoy (2): i 9077
 yosoy (2): i 9078
 yosoy (2): i 9079
 yosoy (2): i 9080
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 9081
 yosoy (2): i 9082
 yosoy (2): i 9083
@@ -59505,7 +59424,6 @@ yosoy (2): i 9391
 yosoy (2): i 9392
 yosoy (2): i 9393
 yosoy (2): i 9394
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 9395
 yosoy (2): i 9396
 yosoy (2): i 9397
@@ -60184,7 +60102,6 @@ yosoy (2): i 10069
 yosoy (2): i 10070
 yosoy (2): i 10071
 yosoy (2): i 10072
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 10073
 yosoy (2): i 10074
 yosoy (2): i 10075
@@ -60725,7 +60642,6 @@ yosoy (2): i 10609
 yosoy (2): i 10610
 yosoy (2): i 10611
 yosoy (2): i 10612
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 10613
 yosoy (2): i 10614
 yosoy (2): i 10615
@@ -61397,7 +61313,6 @@ yosoy (2): i 11280
 yosoy (2): i 11281
 yosoy (2): i 11282
 yosoy (2): i 11283
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 11284
 yosoy (2): i 11285
 yosoy (2): i 11286
@@ -62322,7 +62237,6 @@ yosoy (2): i 12204
 yosoy (2): i 12205
 yosoy (2): i 12206
 yosoy (2): i 12207
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 12208
 yosoy (2): i 12209
 yosoy (2): i 12210
@@ -62698,6 +62612,7 @@ yosoy (2): i 12579
 yosoy (2): i 12580
 yosoy (2): i 12581
 yosoy (2): i 12582
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 12583
 yosoy (2): i 12584
 yosoy (2): i 12585
@@ -62867,7 +62782,6 @@ yosoy (2): i 12748
 yosoy (2): i 12749
 yosoy (2): i 12750
 yosoy (2): i 12751
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 12752
 yosoy (2): i 12753
 yosoy (2): i 12754
@@ -63724,7 +63638,6 @@ yosoy (2): i 13604
 yosoy (2): i 13605
 yosoy (2): i 13606
 yosoy (2): i 13607
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 13608
 yosoy (2): i 13609
 yosoy (2): i 13610
@@ -64248,7 +64161,6 @@ yosoy (2): i 14127
 yosoy (2): i 14128
 yosoy (2): i 14129
 yosoy (2): i 14130
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 14131
 yosoy (2): i 14132
 yosoy (2): i 14133
@@ -64697,7 +64609,6 @@ yosoy (2): i 14575
 yosoy (2): i 14576
 yosoy (2): i 14577
 yosoy (2): i 14578
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 14579
 yosoy (2): i 14580
 yosoy (2): i 14581
@@ -65867,7 +65778,6 @@ yosoy (2): i 15744
 yosoy (2): i 15745
 yosoy (2): i 15746
 yosoy (2): i 15747
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 15748
 yosoy (2): i 15749
 yosoy (2): i 15750
@@ -66637,6 +66547,7 @@ yosoy (2): i 16513
 yosoy (2): i 16514
 yosoy (2): i 16515
 yosoy (2): i 16516
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 16517
 yosoy (2): i 16518
 yosoy (2): i 16519
@@ -67093,7 +67004,6 @@ yosoy (2): i 16969
 yosoy (2): i 16970
 yosoy (2): i 16971
 yosoy (2): i 16972
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 16973
 yosoy (2): i 16974
 yosoy (2): i 16975
@@ -67852,7 +67762,6 @@ yosoy (2): i 17727
 yosoy (2): i 17728
 yosoy (2): i 17729
 yosoy (2): i 17730
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 17731
 yosoy (2): i 17732
 yosoy (2): i 17733
@@ -68362,7 +68271,6 @@ yosoy (2): i 18236
 yosoy (2): i 18237
 yosoy (2): i 18238
 yosoy (2): i 18239
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 18240
 yosoy (2): i 18241
 yosoy (2): i 18242
@@ -68805,7 +68713,6 @@ yosoy (2): i 18678
 yosoy (2): i 18679
 yosoy (2): i 18680
 yosoy (2): i 18681
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 18682
 yosoy (2): i 18683
 yosoy (2): i 18684
@@ -69374,7 +69281,6 @@ yosoy (2): i 19246
 yosoy (2): i 19247
 yosoy (2): i 19248
 yosoy (2): i 19249
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 19250
 yosoy (2): i 19251
 yosoy (2): i 19252
@@ -69708,7 +69614,6 @@ yosoy (2): i 19579
 yosoy (2): i 19580
 yosoy (2): i 19581
 yosoy (2): i 19582
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 19583
 yosoy (2): i 19584
 yosoy (2): i 19585
@@ -70167,7 +70072,6 @@ yosoy (2): i 20037
 yosoy (2): i 20038
 yosoy (2): i 20039
 yosoy (2): i 20040
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 20041
 yosoy (2): i 20042
 yosoy (2): i 20043
@@ -70626,6 +70530,7 @@ yosoy (2): i 20495
 yosoy (2): i 20496
 yosoy (2): i 20497
 yosoy (2): i 20498
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 20499
 yosoy (2): i 20500
 yosoy (2): i 20501
@@ -71170,7 +71075,6 @@ yosoy (2): i 21039
 yosoy (2): i 21040
 yosoy (2): i 21041
 yosoy (2): i 21042
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 21043
 yosoy (2): i 21044
 yosoy (2): i 21045
@@ -71855,7 +71759,6 @@ yosoy (2): i 21723
 yosoy (2): i 21724
 yosoy (2): i 21725
 yosoy (2): i 21726
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 21727
 yosoy (2): i 21728
 yosoy (2): i 21729
@@ -72556,7 +72459,6 @@ yosoy (2): i 22423
 yosoy (2): i 22424
 yosoy (2): i 22425
 yosoy (2): i 22426
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 22427
 yosoy (2): i 22428
 yosoy (2): i 22429
@@ -73827,7 +73729,6 @@ yosoy (2): i 23693
 yosoy (2): i 23694
 yosoy (2): i 23695
 yosoy (2): i 23696
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 23697
 yosoy (2): i 23698
 yosoy (2): i 23699
@@ -74588,6 +74489,7 @@ yosoy (2): i 24453
 yosoy (2): i 24454
 yosoy (2): i 24455
 yosoy (2): i 24456
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 24457
 yosoy (2): i 24458
 yosoy (2): i 24459
@@ -74981,7 +74883,6 @@ yosoy (2): i 24846
 yosoy (2): i 24847
 yosoy (2): i 24848
 yosoy (2): i 24849
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 24850
 yosoy (2): i 24851
 yosoy (2): i 24852
@@ -75897,7 +75798,6 @@ yosoy (2): i 25761
 yosoy (2): i 25762
 yosoy (2): i 25763
 yosoy (2): i 25764
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 25765
 yosoy (2): i 25766
 yosoy (2): i 25767
@@ -76484,7 +76384,6 @@ yosoy (2): i 26347
 yosoy (2): i 26348
 yosoy (2): i 26349
 yosoy (2): i 26350
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 26351
 yosoy (2): i 26352
 yosoy (2): i 26353
@@ -77017,7 +76916,6 @@ yosoy (2): i 26879
 yosoy (2): i 26880
 yosoy (2): i 26881
 yosoy (2): i 26882
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 26883
 yosoy (2): i 26884
 yosoy (2): i 26885
@@ -78164,7 +78062,6 @@ yosoy (2): i 28025
 yosoy (2): i 28026
 yosoy (2): i 28027
 yosoy (2): i 28028
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 28029
 yosoy (2): i 28030
 yosoy (2): i 28031
@@ -78498,6 +78395,7 @@ yosoy (2): i 28358
 yosoy (2): i 28359
 yosoy (2): i 28360
 yosoy (2): i 28361
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 28362
 yosoy (2): i 28363
 yosoy (2): i 28364
@@ -78800,7 +78698,6 @@ yosoy (2): i 28660
 yosoy (2): i 28661
 yosoy (2): i 28662
 yosoy (2): i 28663
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 28664
 yosoy (2): i 28665
 yosoy (2): i 28666
@@ -79493,7 +79390,6 @@ yosoy (2): i 29352
 yosoy (2): i 29353
 yosoy (2): i 29354
 yosoy (2): i 29355
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 29356
 yosoy (2): i 29357
 yosoy (2): i 29358
@@ -80099,7 +79995,6 @@ yosoy (2): i 29957
 yosoy (2): i 29958
 yosoy (2): i 29959
 yosoy (2): i 29960
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 29961
 yosoy (2): i 29962
 yosoy (2): i 29963
@@ -81121,7 +81016,6 @@ yosoy (2): i 30978
 yosoy (2): i 30979
 yosoy (2): i 30980
 yosoy (2): i 30981
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 30982
 yosoy (2): i 30983
 yosoy (2): i 30984
@@ -81720,7 +81614,6 @@ yosoy (2): i 31576
 yosoy (2): i 31577
 yosoy (2): i 31578
 yosoy (2): i 31579
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 31580
 yosoy (2): i 31581
 yosoy (2): i 31582
@@ -82269,7 +82162,6 @@ yosoy (2): i 32124
 yosoy (2): i 32125
 yosoy (2): i 32126
 yosoy (2): i 32127
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 32128
 yosoy (2): i 32129
 yosoy (2): i 32130
@@ -82498,6 +82390,7 @@ yosoy (2): i 32352
 yosoy (2): i 32353
 yosoy (2): i 32354
 yosoy (2): i 32355
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 32356
 yosoy (2): i 32357
 yosoy (2): i 32358
@@ -82805,7 +82698,6 @@ yosoy (2): i 32659
 yosoy (2): i 32660
 yosoy (2): i 32661
 yosoy (2): i 32662
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 32663
 yosoy (2): i 32664
 yosoy (2): i 32665
@@ -83311,7 +83203,6 @@ yosoy (2): i 33164
 yosoy (2): i 33165
 yosoy (2): i 33166
 yosoy (2): i 33167
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 33168
 yosoy (2): i 33169
 yosoy (2): i 33170
@@ -83942,7 +83833,6 @@ yosoy (2): i 33794
 yosoy (2): i 33795
 yosoy (2): i 33796
 yosoy (2): i 33797
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 33798
 yosoy (2): i 33799
 yosoy (2): i 33800
@@ -84727,7 +84617,6 @@ yosoy (2): i 34578
 yosoy (2): i 34579
 yosoy (2): i 34580
 yosoy (2): i 34581
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 34582
 yosoy (2): i 34583
 yosoy (2): i 34584
@@ -85363,7 +85252,6 @@ yosoy (2): i 35213
 yosoy (2): i 35214
 yosoy (2): i 35215
 yosoy (2): i 35216
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 35217
 yosoy (2): i 35218
 yosoy (2): i 35219
@@ -85971,7 +85859,6 @@ yosoy (2): i 35820
 yosoy (2): i 35821
 yosoy (2): i 35822
 yosoy (2): i 35823
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 35824
 yosoy (2): i 35825
 yosoy (2): i 35826
@@ -86409,6 +86296,7 @@ yosoy (2): i 36257
 yosoy (2): i 36258
 yosoy (2): i 36259
 yosoy (2): i 36260
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 36261
 yosoy (2): i 36262
 yosoy (2): i 36263
@@ -86493,7 +86381,6 @@ yosoy (2): i 36341
 yosoy (2): i 36342
 yosoy (2): i 36343
 yosoy (2): i 36344
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 36345
 yosoy (2): i 36346
 yosoy (2): i 36347
@@ -87111,7 +86998,6 @@ yosoy (2): i 36958
 yosoy (2): i 36959
 yosoy (2): i 36960
 yosoy (2): i 36961
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 36962
 yosoy (2): i 36963
 yosoy (2): i 36964
@@ -87578,7 +87464,6 @@ yosoy (2): i 37424
 yosoy (2): i 37425
 yosoy (2): i 37426
 yosoy (2): i 37427
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 37428
 yosoy (2): i 37429
 yosoy (2): i 37430
@@ -88415,7 +88300,6 @@ yosoy (2): i 38260
 yosoy (2): i 38261
 yosoy (2): i 38262
 yosoy (2): i 38263
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 38264
 yosoy (2): i 38265
 yosoy (2): i 38266
@@ -89085,7 +88969,6 @@ yosoy (2): i 38929
 yosoy (2): i 38930
 yosoy (2): i 38931
 yosoy (2): i 38932
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 38933
 yosoy (2): i 38934
 yosoy (2): i 38935
@@ -89645,7 +89528,6 @@ yosoy (2): i 39488
 yosoy (2): i 39489
 yosoy (2): i 39490
 yosoy (2): i 39491
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 39492
 yosoy (2): i 39493
 yosoy (2): i 39494
@@ -90296,6 +90178,7 @@ yosoy (2): i 40138
 yosoy (2): i 40139
 yosoy (2): i 40140
 yosoy (2): i 40141
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 40142
 yosoy (2): i 40143
 yosoy (2): i 40144
@@ -90518,7 +90401,6 @@ yosoy (2): i 40360
 yosoy (2): i 40361
 yosoy (2): i 40362
 yosoy (2): i 40363
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 40364
 yosoy (2): i 40365
 yosoy (2): i 40366
@@ -91141,7 +91023,6 @@ yosoy (2): i 40982
 yosoy (2): i 40983
 yosoy (2): i 40984
 yosoy (2): i 40985
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 40986
 yosoy (2): i 40987
 yosoy (2): i 40988
@@ -91686,7 +91567,6 @@ yosoy (2): i 41526
 yosoy (2): i 41527
 yosoy (2): i 41528
 yosoy (2): i 41529
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 41530
 yosoy (2): i 41531
 yosoy (2): i 41532
@@ -92177,7 +92057,6 @@ yosoy (2): i 42016
 yosoy (2): i 42017
 yosoy (2): i 42018
 yosoy (2): i 42019
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 42020
 yosoy (2): i 42021
 yosoy (2): i 42022
@@ -92916,7 +92795,6 @@ yosoy (2): i 42754
 yosoy (2): i 42755
 yosoy (2): i 42756
 yosoy (2): i 42757
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 42758
 yosoy (2): i 42759
 yosoy (2): i 42760
@@ -93414,7 +93292,6 @@ yosoy (2): i 43251
 yosoy (2): i 43252
 yosoy (2): i 43253
 yosoy (2): i 43254
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 43255
 yosoy (2): i 43256
 yosoy (2): i 43257
@@ -93927,12 +93804,12 @@ yosoy (2): i 43763
 yosoy (2): i 43764
 yosoy (2): i 43765
 yosoy (2): i 43766
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 43767
 yosoy (2): i 43768
 yosoy (2): i 43769
 yosoy (2): i 43770
 yosoy (2): i 43771
+-> TRATANDO INT. DE RELOJ
 yosoy (2): i 43772
 yosoy (2): i 43773
 yosoy (2): i 43774
@@ -94433,7 +94310,6 @@ yosoy (2): i 44268
 yosoy (2): i 44269
 yosoy (2): i 44270
 yosoy (2): i 44271
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 44272
 yosoy (2): i 44273
 yosoy (2): i 44274
@@ -94876,7 +94752,6 @@ yosoy (2): i 44710
 yosoy (2): i 44711
 yosoy (2): i 44712
 yosoy (2): i 44713
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 44714
 yosoy (2): i 44715
 yosoy (2): i 44716
@@ -95340,7 +95215,6 @@ yosoy (2): i 45173
 yosoy (2): i 45174
 yosoy (2): i 45175
 yosoy (2): i 45176
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 45177
 yosoy (2): i 45178
 yosoy (2): i 45179
@@ -95837,7 +95711,6 @@ yosoy (2): i 45669
 yosoy (2): i 45670
 yosoy (2): i 45671
 yosoy (2): i 45672
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 45673
 yosoy (2): i 45674
 yosoy (2): i 45675
@@ -96269,7 +96142,6 @@ yosoy (2): i 46100
 yosoy (2): i 46101
 yosoy (2): i 46102
 yosoy (2): i 46103
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 46104
 yosoy (2): i 46105
 yosoy (2): i 46106
@@ -96748,7 +96620,6 @@ yosoy (2): i 46578
 yosoy (2): i 46579
 yosoy (2): i 46580
 yosoy (2): i 46581
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 46582
 yosoy (2): i 46583
 yosoy (2): i 46584
@@ -97291,7 +97162,6 @@ yosoy (2): i 47120
 yosoy (2): i 47121
 yosoy (2): i 47122
 yosoy (2): i 47123
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 47124
 yosoy (2): i 47125
 yosoy (2): i 47126
@@ -97816,8 +97686,8 @@ yosoy (2): i 47644
 yosoy (2): i 47645
 yosoy (2): i 47646
 yosoy (2): i 47647
-yosoy (2): i 47648
 -> TRATANDO INT. DE RELOJ
+yosoy (2): i 47648
 yosoy (2): i 47649
 yosoy (2): i 47650
 yosoy (2): i 47651
@@ -98531,7 +98401,6 @@ yosoy (2): i 48358
 yosoy (2): i 48359
 yosoy (2): i 48360
 yosoy (2): i 48361
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 48362
 yosoy (2): i 48363
 yosoy (2): i 48364
@@ -99049,7 +98918,6 @@ yosoy (2): i 48875
 yosoy (2): i 48876
 yosoy (2): i 48877
 yosoy (2): i 48878
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 48879
 yosoy (2): i 48880
 yosoy (2): i 48881
@@ -99590,7 +99458,6 @@ yosoy (2): i 49415
 yosoy (2): i 49416
 yosoy (2): i 49417
 yosoy (2): i 49418
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 49419
 yosoy (2): i 49420
 yosoy (2): i 49421
@@ -100108,7 +99975,6 @@ yosoy (2): i 49932
 yosoy (2): i 49933
 yosoy (2): i 49934
 yosoy (2): i 49935
--> TRATANDO INT. DE RELOJ
 yosoy (2): i 49936
 yosoy (2): i 49937
 yosoy (2): i 49938

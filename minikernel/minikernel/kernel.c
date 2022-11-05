@@ -336,6 +336,8 @@ int sis_obtener_id_pr(){
 int sis_dormir(){
 	//Leemos el registro en el que se encuentra los segundos
 	int segs = (int)leer_registro(1);
+	unsigned long long actualReloj=leer_reloj_CMOS();
+	while(leer_reloj_CMOS()!=actualReloj+segs*100);
 }
 
 /*
