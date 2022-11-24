@@ -205,6 +205,22 @@ static void int_terminal(){
  * Tratamiento de interrupciones de reloj
  */
 static void int_reloj(){
+	
+	BCP *procARevisar = lista_bloqueados.primero;
+
+	while(procARevisar!=NULL){
+		procARevisar->ticksBloqueado--;
+		if(procARevisar->ticksBloqueado==0){
+			BCP *siguiente=procARevisar->siguiente;
+			procARevisar->estado=LISTO;
+			insertar_ultimo(&lista_listos,procARevisar);
+			eliminar_elem(&lista_bloqueados,procARevisar);
+			procARevisar=siguiente;
+		}else procARevisar=procARevisar->siguiente;
+	}
+
+
+
 
 	printk("-> TRATANDO INT. DE RELOJ\n");
 
@@ -335,9 +351,9 @@ int sis_obtener_id_pr(){
 /*I. Funcion que duerme el proceso */
 int sis_dormir(){
 	//Leemos el registro en el que se encuentra los segundos
-	int segs = (int)leer_registro(1);
-	unsigned long long actualReloj=leer_reloj_CMOS();
-	while(leer_reloj_CMOS()!=actualReloj+segs*100);
+	unsigned long segs = (unsigned long)leer_registro(1);
+	
+	return 0;
 }
 
 /*
