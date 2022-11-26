@@ -206,25 +206,30 @@ static void int_terminal(){
  */
 static void int_reloj(){
 	
+	//Apuntamos al primer elemento de la lista de bloqueados:
 	BCP *procARevisar = lista_bloqueados.primero;
 
+	//Recorremos la lista de procesos bloqueados:
 	while(procARevisar!=NULL){
+		//Decrementamos un tick el proceso a revisar:
 		procARevisar->ticksBloqueado--;
+
+		//Si el los ticks estan a cero lo pasamos de la lista de bloqueados a la de listos:
 		if(procARevisar->ticksBloqueado==0){
+			//Apuntamos al siguiente proceso:
 			BCP *siguiente=procARevisar->siguiente;
+			//Cambiamos el estado:
 			procARevisar->estado=LISTO;
+			//Instertamos al final de la lista de bloqueados:
 			insertar_ultimo(&lista_listos,procARevisar);
+			//Y eliminamos de la lista de bloqueados:
 			eliminar_elem(&lista_bloqueados,procARevisar);
+			//Por ultimo cambiamos el proceso a revisar al siguiente:
 			procARevisar=siguiente;
-		}else procARevisar=procARevisar->siguiente;
+		}
+		//En caso de que no se sigue revisando al siguiente de la lista: 
+		else procARevisar=procARevisar->siguiente;
 	}
-
-
-
-
-	printk("-> TRATANDO INT. DE RELOJ\n");
-
-        return;
 }
 
 /*
@@ -352,7 +357,6 @@ int sis_obtener_id_pr(){
 int sis_dormir(){
 	//Leemos el registro en el que se encuentra los segundos
 	unsigned long segs = (unsigned long)leer_registro(1);
-	
 	return 0;
 }
 
