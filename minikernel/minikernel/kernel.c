@@ -387,6 +387,27 @@ int sis_dormir(){
 	return 0;
 }
 
+/*I. Funcion que crea un mutex */
+int sis_crear_mutex(){
+	return 0;
+}
+/*I. Funcion que abre un mutex */
+int sis_abrir_mutex(){
+	return 0;
+}
+/*I. Funcion que bloquea el proceso */
+int sis_lock(){
+	return 0;
+}
+/*I. Funcion que desbloquea el proceso pasandole el id del mutex */
+int sis_unlock(){
+	return 0;
+}
+/*I. Funcion que cierra el mutex pasandole el id del mutex */
+int sis_cerrar_mutex(){
+	return 0;
+}
+
 /*
  *
  * Rutina de inicializaci�n invocada en arranque

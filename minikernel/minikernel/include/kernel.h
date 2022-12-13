@@ -38,7 +38,19 @@ typedef struct BCP_t {
 	BCPptr siguiente;			/* puntero a otro BCP */
 	void *info_mem;				/* descriptor del mapa de memoria */
 	unsigned int ticksDormido;  /* número de ticks que tienes que estar dormido */
-} BCP;	
+	MUTEX descriptores_mutex[NUM_MUT_PROC];
+} BCP;
+
+#define MUTEX_UNBLOCK 0;
+#define MUTEX_BLOCK 1;
+
+typedef struct MUTEX_t {
+	int id; 
+	char name[MAX_NOM_MUT];
+	int tipo;
+	int estado;
+	lista_BCPs procesos_bloqueados;
+} MUTEX;
 
 /*
  *
@@ -65,6 +77,11 @@ BCP * p_proc_actual=NULL;
  */
 
 BCP tabla_procs[MAX_PROC];
+
+/*
+ * Variable global que representa la tabla de mutexs 
+ */
+MUTEX tabla_mutexs[NUM_MUT];
 
 /*
  * Variable global que representa la cola de procesos listos
@@ -97,15 +114,31 @@ int sis_escribir();
 int sis_obtener_id_pr();
 /*I. Funcion que duerme el proceso */
 int sis_dormir();
+/*I. Funcion que crea un mutex */
+int sis_crear_mutex();
+/*I. Funcion que abre un mutex */
+int sis_abrir_mutex();
+/*I. Funcion que bloquea el proceso */
+int sis_lock();
+/*I. Funcion que desbloquea el proceso pasandole el id del mutex */
+int sis_unlock();
+/*I. Funcion que cierra el mutex pasandole el id del mutex */
+int sis_cerrar_mutex();
 
 /*
  * Variable global que contiene las rutinas que realizan cada llamada
  */
-servicio tabla_servicios[NSERVICIOS]={	{sis_crear_proceso},
+servicio tabla_servicios[NSERVICIOS]={	
+					{sis_crear_proceso},
 					{sis_terminar_proceso},
 					{sis_escribir},
 					{sis_obtener_id_pr},
-					{sis_dormir}};
+					{sis_dormir},
+					{sis_crear_mutex},
+					{sis_abrir_mutex},
+					{sis_lock},
+					{sis_unlock},
+					{sis_cerrar_mutex}};
 
 #endif /* _KERNEL_H */
 

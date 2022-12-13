@@ -35,6 +35,9 @@ int obtener_id_pr();
 int dormir(unsigned int segundos);
 
 /* Funciones del mutex: */
+#define NO_RECURSIVO 0
+#define RECURSIVO 1
+
 /*I. Funcion que crea un mutex pasandole el nombre y el tipo */
 int crear_mutex(char *nombre, int tipo);
 /*I. Funcion que abre un mutex pasandole el nombre que lo identifica */
