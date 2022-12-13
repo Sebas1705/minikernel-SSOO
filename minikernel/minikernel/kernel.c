@@ -105,7 +105,7 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
 static void espera_int(){
 	int nivel;
 
-	printk("-> NO HAY LISTOS. ESPERA INT\n");
+	// printk("-> NO HAY LISTOS. ESPERA INT\n");
 
 	/* Baja al m�nimo el nivel de interrupci�n mientras espera */
 	nivel=fijar_nivel_int(NIVEL_1);
@@ -207,28 +207,29 @@ static void int_terminal(){
 static void int_reloj(){
 	
 	//Apuntamos al primer elemento de la lista de bloqueados:
-	BCP *procARevisar = lista_bloqueados.primero;
+	BCP *procARevisar = lista_dormidos.primero;
 
 	//Recorremos la lista de procesos bloqueados:
 	while(procARevisar!=NULL){
+
 		//Decrementamos un tick el proceso a revisar:
-		procARevisar->ticksBloqueado--;
+		procARevisar->ticksDormido--;
+		//Apuntamos al siguiente proceso:
+		BCP *siguiente=procARevisar->siguiente;
 
 		//Si el los ticks estan a cero lo pasamos de la lista de bloqueados a la de listos:
-		if(procARevisar->ticksBloqueado==0){
-			//Apuntamos al siguiente proceso:
-			BCP *siguiente=procARevisar->siguiente;
-			//Cambiamos el estado:
-			procARevisar->estado=LISTO;
-			//Instertamos al final de la lista de bloqueados:
+		if(procARevisar->ticksDormido==0){
+			//Elevamos el nivel de int para inhibir otra int_reloj:
+			int nivel=fijar_nivel_int(NIVEL_3);
+			//Eliminamos del la lista de dormidos:
+			eliminar_elem(&lista_dormidos,procARevisar);
+			//Lo insertamos al final de la lista de listos:
 			insertar_ultimo(&lista_listos,procARevisar);
-			//Y eliminamos de la lista de bloqueados:
-			eliminar_elem(&lista_bloqueados,procARevisar);
-			//Por ultimo cambiamos el proceso a revisar al siguiente:
-			procARevisar=siguiente;
+			//Volvemos al nivel original 
+			fijar_nivel_int(nivel);
 		}
-		//En caso de que no se sigue revisando al siguiente de la lista: 
-		else procARevisar=procARevisar->siguiente;
+		//Cambiamos al siguiente proceso:
+		procARevisar=siguiente;
 	}
 }
 
@@ -355,8 +356,34 @@ int sis_obtener_id_pr(){
 
 /*I. Funcion que duerme el proceso */
 int sis_dormir(){
-	//Leemos el registro en el que se encuentra los segundos
-	unsigned long segs = (unsigned long)leer_registro(1);
+
+	//Leer de los registros los segundos:
+	unsigned int segundos=(unsigned int)leer_registro(1); 
+
+
+	//Elevar nivel interrupcion y guardar actual:
+	int nivel=fijar_nivel_int(NIVEL_3);
+	//Cambiar estado a bloqueado:
+	p_proc_actual->estado=BLOQUEADO;
+	//Cambiar los ticksDormidos a los introducidos:
+	p_proc_actual->ticksDormido=segundos*TICK;
+	//Guardamos el proceso:
+	BCP* p_proc_dormido = p_proc_actual; 
+	
+	//Eliminamos de la lista de listos:
+	eliminar_primero(&lista_listos);
+	//Lo insertamos en la lista de dormidos:
+	insertar_ultimo(&lista_dormidos, p_proc_dormido);
+
+	//Llamamos al planificador para el nuevo proceso actual:
+	p_proc_actual=planificador();
+	
+	//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+	cambio_contexto(&(p_proc_dormido->contexto_regs), &(p_proc_actual->contexto_regs));
+
+	//Volvemos al nivel de int anterior:
+	fijar_nivel_int(nivel);
+
 	return 0;
 }
 

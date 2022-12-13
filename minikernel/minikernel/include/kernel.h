@@ -37,7 +37,7 @@ typedef struct BCP_t {
     void * pila;				/* dir. inicial de la pila */
 	BCPptr siguiente;			/* puntero a otro BCP */
 	void *info_mem;				/* descriptor del mapa de memoria */
-	int ticksBloqueado;         /* número de ticks que tienes que estar bloqueado */
+	unsigned int ticksDormido;  /* número de ticks que tienes que estar dormido */
 } BCP;	
 
 /*
@@ -74,7 +74,7 @@ lista_BCPs lista_listos= {NULL, NULL};
 /*
  * Variable global que representa la cola de procesos bloqueados
  */
-lista_BCPs lista_bloqueados= {NULL, NULL};
+lista_BCPs lista_dormidos= {NULL, NULL};
 
 /*
  *
