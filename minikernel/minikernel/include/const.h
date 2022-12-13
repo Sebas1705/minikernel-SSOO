@@ -79,5 +79,6 @@
 /* direcci�n de puerto de E/S del terminal */
 #define DIR_TERMINAL 1
 
+
 #endif /* _CONST_H */
 
