@@ -299,6 +299,27 @@ static int crear_tarea(char *prog){
 	return error;
 }
 
+/*I. Funcion que calcula el tamaño del nombre pasado*/
+static int sizeNombre(char* nombre){
+	int tam=0;
+	char*temp=nombre;
+	while(temp!="\0"){
+        tam++;
+        temp+=sizeof(char);
+    }
+    return tam;
+}
+
+/*I. Funcion que inserta el mutex al final de la lista*/
+static void insertar_ultimo_MUTEX(MUTEX *mutex){
+	if (lista_mutexs.primero==NULL)
+		lista_mutexs.primero=mutex;
+	else
+		lista_mutexs.ultimo->siguiente=mutex;
+	lista_mutexs.ultimo=mutex;
+	mutex->siguiente=NULL;
+}
+
 /*
  *
  * Rutinas que llevan a cabo las llamadas al sistema
@@ -389,6 +410,23 @@ int sis_dormir(){
 
 /*I. Funcion que crea un mutex */
 int sis_crear_mutex(){
+	//Comprobamos que se puede crear un mutex:
+	if(n_mutexs>=NUM_MUT)return -1;
+	MUTEX m;
+	char* nombre=(char *)leer_registro(1);
+	int charSize=sizeNombre(nombre);
+	//Comprobamos que el tamaño del nombre es menor al maximo;
+	if(charSize>MAX_NOM_MUT) return -2;
+	m.nombre=(char*)malloc(charSize);
+	m.tipo=(int)leer_registro(2);
+	m.procesos_bloqueados.primero=NULL;
+	m.procesos_bloqueados.ultimo=NULL;
+	m.siguiente=NULL;
+	m.id=cont_m++;
+	m.estado=MUTEX_UNBLOCK;
+	
+	
+
 	return 0;
 }
 /*I. Funcion que abre un mutex */
