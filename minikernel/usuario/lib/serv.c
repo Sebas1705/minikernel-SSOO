@@ -49,27 +49,27 @@ int obtener_id_pr(){
 }
 /*I. Funcion que duerme el proceso */
 int dormir(unsigned int segundos){
-   return llamsis(DORMIR, 1, segundos);
+   return llamsis(DORMIR, 1, (long)segundos);
 }
 /*I. Funcion que crea un mutex pasandole el nombre y el tipo */
 int crear_mutex(char *nombre, int tipo){
-   return llamsis(CREAR_MUTEX, 2, nombre,tipo);
+   return llamsis(CREAR_MUTEX, 2, (long)nombre, (long)tipo);
 }
 /*I. Funcion que abre un mutex pasandole el nombre que lo identifica */
 int abrir_mutex(char *nombre){
-   return llamsis(ABRIR_MUTEX, 1, nombre);
+   return llamsis(ABRIR_MUTEX, 1, (long)nombre);
 }
 /*I. Funcion que bloquea el proceso pasandole el id del mutex */
 int lock(unsigned int mutexid){
-   return llamsis(LOCK, 1, mutexid);
+   return llamsis(LOCK, 1, (long)mutexid);
 }
 /*I. Funcion que desbloquea el proceso pasandole el id del mutex */
 int unlock(unsigned int mutexid){
-   return llamsis(UNLOCK, 1, mutexid);
+   return llamsis(UNLOCK, 1, (long)mutexid);
 }
 /*I. Funcion que cierra el mutex pasandole el id del mutex */
 int cerrar_mutex(unsigned int mutexid){
-   return llamsis(CERRAR_MUTEX, 1, mutexid);
+   return llamsis(CERRAR_MUTEX, 1, (long)mutexid);
 }
 
 

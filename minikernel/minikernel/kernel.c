@@ -14,7 +14,8 @@
  */
 
 #include "kernel.h"	/* Contiene defs. usadas por este modulo */
-
+#include "string.h"
+#include "stdlib.h"
 /*
  *
  * Funciones relacionadas con la tabla de procesos:
@@ -289,6 +290,11 @@ static int crear_tarea(char *prog){
 		p_proc->id=proc;
 		p_proc->estado=LISTO;
 
+		/* Bucle para inicializar los descriptores */
+		for(int i=0; i<NUM_MUT_PROC; i++){
+			p_proc->descriptores_mutex[i]=-1;
+		}
+
 		/* lo inserta al final de cola de listos */
 		insertar_ultimo(&lista_listos, p_proc);
 		error= 0;
@@ -299,25 +305,33 @@ static int crear_tarea(char *prog){
 	return error;
 }
 
-/*I. Funcion que calcula el tamaño del nombre pasado*/
-static int sizeNombre(char* nombre){
-	int tam=0;
-	char*temp=nombre;
-	while(temp!="\0"){
-        tam++;
-        temp+=sizeof(char);
-    }
-    return tam;
+/*I. Iniciar tabla de mutexs*/
+static void iniciar_tabla_mutexs(){
+	int i;
+
+	for (i=0; i<NUM_MUT; i++)
+		tabla_mutexs[i].id=-1;
 }
 
 /*I. Funcion que inserta el mutex al final de la lista*/
-static void insertar_ultimo_MUTEX(MUTEX *mutex){
-	if (lista_mutexs.primero==NULL)
-		lista_mutexs.primero=mutex;
-	else
-		lista_mutexs.ultimo->siguiente=mutex;
-	lista_mutexs.ultimo=mutex;
-	mutex->siguiente=NULL;
+static void insertar_ultimo_MUTEX(MUTEX mutex){
+	tabla_mutexs[n_mutexs++]=mutex;
+}
+
+/*I. Funcion que busca un descriptor libre en el proceso actual*/
+static int desLibre(){
+	for(int i=0;i<NUM_MUT_PROC;i++){
+		if(p_proc_actual->descriptores_mutex[i]==-1)return i;
+	}
+	return -1;
+}
+
+/*I. Funcion que comprueba si ya hay un mutex con el mismo nombre*/
+static int existeNombre(char* nombre){
+	for(int i=0;i<n_mutexs;i++){
+		if(strcmp(nombre,tabla_mutexs[i].nombre)==0)return -1;
+	}
+	return 0;
 }
 
 /*
@@ -337,6 +351,7 @@ int sis_crear_proceso(){
 
 	printk("-> PROC %d: CREAR PROCESO\n", p_proc_actual->id);
 	prog=(char *)leer_registro(1);
+	printk("PROG: %s\n", prog);
 	res=crear_tarea(prog);
 	return res;
 }
@@ -410,24 +425,64 @@ int sis_dormir(){
 
 /*I. Funcion que crea un mutex */
 int sis_crear_mutex(){
-	//Comprobamos que se puede crear un mutex:
-	if(n_mutexs>=NUM_MUT)return -1;
-	MUTEX m;
+	
+	printk("Intentando crear mutex, total mutexs: %d\n", n_mutexs);
+	//1.Comprobamos que el tamaño del nombre es menor al maximo;
 	char* nombre=(char *)leer_registro(1);
-	int charSize=sizeNombre(nombre);
-	//Comprobamos que el tamaño del nombre es menor al maximo;
-	if(charSize>MAX_NOM_MUT) return -2;
-	m.nombre=(char*)malloc(charSize);
+	int charSize=strlen(nombre);
+	if(charSize>=MAX_NOM_MUT) return -1;
+	
+	//2.Buscamos la posicion en el array de descriptores:
+	int posLibre=desLibre();
+	if(posLibre==-1) return -2;
+
+	//3.Comprobamos que no existe un mutex con el mismo nombre:
+	if(existeNombre(nombre)==-1) return -3;
+
+	//Comprobamos que se puede crear un mutex si no lo bloqueamos:
+	while(n_mutexs==NUM_MUT){
+		//Elevar nivel interrupcion y guardar actual:
+		int nivel=fijar_nivel_int(NIVEL_3);
+		//Cambiar estado a bloqueado:
+		p_proc_actual->estado=BLOQUEADO;
+		//Guardamos el proceso:
+		BCP* p_proc_bloqueado = p_proc_actual; 
+		
+		//Eliminamos de la lista de listos:
+		eliminar_primero(&lista_listos);
+		//Lo insertamos en la lista de bloqueado:
+		insertar_ultimo(&lista_bloqueados, p_proc_bloqueado);
+
+		//Llamamos al planificador para el nuevo proceso actual:
+		p_proc_actual=planificador();
+		
+		//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+		cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
+
+		//Volvemos al nivel de int anterior:
+		fijar_nivel_int(nivel);
+	}
+
+	//Inicializamos todos los aspectos del mutex:
+	MUTEX m;
+	m.nombre=nombre;
 	m.tipo=(int)leer_registro(2);
 	m.procesos_bloqueados.primero=NULL;
 	m.procesos_bloqueados.ultimo=NULL;
 	m.siguiente=NULL;
 	m.id=cont_m++;
 	m.estado=MUTEX_UNBLOCK;
-	
-	
 
-	return 0;
+	//Guardamos el descriptor en el array:
+	p_proc_actual->descriptores_mutex[posLibre]=m.id;
+
+	//Guardamos el mutex en la lista:
+	printk("Insertando\n");
+	insertar_ultimo_MUTEX(m);
+
+	printk("Creado mutex con id %d, total mutexs: %d\n",m.id, n_mutexs);
+
+	return m.id;
 }
 /*I. Funcion que abre un mutex */
 int sis_abrir_mutex(){
@@ -466,6 +521,7 @@ int main(){
 	iniciar_cont_teclado();		/* inici cont. teclado */
 
 	iniciar_tabla_proc();		/* inicia BCPs de tabla de procesos */
+	iniciar_tabla_mutexs();     /* I. inciar tabla de mutexs*/
 
 	/* crea proceso inicial */
 	if (crear_tarea((void *)"init")<0)
