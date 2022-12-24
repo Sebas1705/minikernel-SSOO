@@ -310,12 +310,7 @@ static void iniciar_tabla_mutexs(){
 	int i;
 
 	for (i=0; i<NUM_MUT; i++)
-		tabla_mutexs[i].id=-1;
-}
-
-/*I. Funcion que inserta el mutex al final de la lista*/
-static void insertar_ultimo_MUTEX(MUTEX mutex){
-	tabla_mutexs[n_mutexs++]=mutex;
+		tabla_mutexs[i].creado=0;
 }
 
 /*I. Funcion que busca un descriptor libre en el proceso actual*/
@@ -329,9 +324,26 @@ static int desLibre(){
 /*I. Funcion que comprueba si ya hay un mutex con el mismo nombre*/
 static int existeNombre(char* nombre){
 	for(int i=0;i<n_mutexs;i++){
-		if(strcmp(nombre,tabla_mutexs[i].nombre)==0)return -1;
+		if(strcmp(nombre,tabla_mutexs[i].nombre)==0)return i;
 	}
-	return 0;
+	return -1;
+}
+
+/*I. Funcion igual que existe nombre pero en la tabla de descriptores*/
+static int existeNombreDes(char* nombre){
+	for(int i=0;i<NUM_MUT_PROC;i++){
+		int des=p_proc_actual->descriptores_mutex[i];
+		if(des!=-1&&strcmp(tabla_mutexs[des].nombre,nombre)==0)return i;
+	}
+	return -1;
+}
+
+/*I. Funcion que devuelve la primera posicion de un mutex libre*/
+static int buscarMutexLibre(){
+	for(int i=0;i<NUM_MUT;i++){
+		if(tabla_mutexs[i].creado==0)return i;
+	}
+	return -1;
 }
 
 /*
@@ -426,21 +438,31 @@ int sis_dormir(){
 /*I. Funcion que crea un mutex */
 int sis_crear_mutex(){
 	
-	printk("Intentando crear mutex, total mutexs: %d\n", n_mutexs);
 	//1.Comprobamos que el tamaño del nombre es menor al maximo;
 	char* nombre=(char *)leer_registro(1);
 	int charSize=strlen(nombre);
-	if(charSize>=MAX_NOM_MUT) return -1;
+	if(charSize>=MAX_NOM_MUT){
+		printk("[SIS_CREAR_MUTEX] - Nombre demasiado largo (%d)\n",charSize);
+		return -1;
+	} 
 	
-	//2.Buscamos la posicion en el array de descriptores:
+	//2.Buscamos el descriptor libre:
 	int posLibre=desLibre();
-	if(posLibre==-1) return -2;
+	if(posLibre==-1){
+		printk("[SIS_CREAR_MUTEX] - No hay descriptores libres en el proceso %d\n",p_proc_actual->id);
+		return -2;
+	} 
 
 	//3.Comprobamos que no existe un mutex con el mismo nombre:
-	if(existeNombre(nombre)==-1) return -3;
+	if(existeNombre(nombre)!=-1){
+		printk("[SIS_CREAR_MUTEX] - Nombre ya existe (%s)\n",nombre);
+		return -3;
+	} 
 
 	//Comprobamos que se puede crear un mutex si no lo bloqueamos:
-	while(n_mutexs==NUM_MUT){
+	int mutexLibre = buscarMutexLibre();
+	while(mutexLibre==-1){
+		printk("[SIS_CREAR_MUTEX] - No hay mutex libre, bloqueando proceso %d - %d\n",p_proc_actual->id, mutexLibre);
 		//Elevar nivel interrupcion y guardar actual:
 		int nivel=fijar_nivel_int(NIVEL_3);
 		//Cambiar estado a bloqueado:
@@ -457,36 +479,52 @@ int sis_crear_mutex(){
 		p_proc_actual=planificador();
 		
 		//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+		printk("CAMBIO CONTEXTO DE %d A %d\n", p_proc_bloqueado->id, p_proc_actual->id);
 		cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
 
 		//Volvemos al nivel de int anterior:
 		fijar_nivel_int(nivel);
+
+		mutexLibre=buscarMutexLibre();
 	}
 
 	//Inicializamos todos los aspectos del mutex:
 	MUTEX m;
 	m.nombre=nombre;
 	m.tipo=(int)leer_registro(2);
-	m.procesos_bloqueados.primero=NULL;
-	m.procesos_bloqueados.ultimo=NULL;
-	m.siguiente=NULL;
-	m.id=cont_m++;
-	m.estado=MUTEX_UNBLOCK;
+	m.creado=1;/*Creado*/
+	m.procesos_bloqueados_lock.primero=NULL;
+	m.procesos_bloqueados_lock.ultimo=NULL;
+	m.estado=0;/*No bloqueado*/
+	m.abierto=0;/*Cerrado*/
 
 	//Guardamos el descriptor en el array:
-	p_proc_actual->descriptores_mutex[posLibre]=m.id;
+	p_proc_actual->descriptores_mutex[posLibre]=mutexLibre;
 
 	//Guardamos el mutex en la lista:
-	printk("Insertando\n");
-	insertar_ultimo_MUTEX(m);
+	tabla_mutexs[mutexLibre]=m;
+	n_mutexs++;
 
-	printk("Creado mutex con id %d, total mutexs: %d\n",m.id, n_mutexs);
+	printk("Creado mutex con descriptor %d, total mutexs: %d\n", mutexLibre, n_mutexs);
 
-	return m.id;
+	return mutexLibre;
 }
 /*I. Funcion que abre un mutex */
 int sis_abrir_mutex(){
-	return 0;
+	
+	//1.Comprobamos que existe el mutex en la tabla de descriptores:
+	char* nombre=(char *)leer_registro(1);
+	int posDes=existeNombre(nombre);
+	if(posDes==-1){
+		printk("[SIS_ABRIR_MUTEX] - Nombre no existe (%s)\n", nombre);
+		return -1;
+	}
+
+	//Abrimos el mutex:
+	int des=p_proc_actual->descriptores_mutex[posDes];
+	tabla_mutexs[des].abierto=1;
+	printk("Abierto mutex con descriptor %d, por el proceso %d\n", des, p_proc_actual->id);
+	return des;
 }
 /*I. Funcion que bloquea el proceso */
 int sis_lock(){

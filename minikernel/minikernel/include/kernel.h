@@ -56,35 +56,22 @@ typedef struct{
 	BCP *ultimo;
 } lista_BCPs;
 
-#define MUTEX_UNBLOCK 0;
-#define MUTEX_BLOCK 1;
-
 typedef struct MUTEX_t *MUTEXptr;
 
-typedef struct MUTEX_t {
-	int id; 
+typedef struct MUTEX_t { 
 	char *nombre;
 	int tipo;
-	int estado;
-	lista_BCPs procesos_bloqueados;
-	MUTEXptr siguiente;
+	int estado; /* 0-No bloqueado, 1-Bloqueado*/
+	int creado; /* 0-No creado, 1-Creado*/
+	int abierto;/* 0-Cerrado, 1-Abierto*/
+	lista_BCPs procesos_bloqueados_lock;
 } MUTEX;
 
-/* I. Struct lista mutex*/
-typedef struct{
-	MUTEX* primero;
-	MUTEX* ultimo;
-}lista_MUTEXs;
 
 /*
  * Variable global que cuenta el numero de mutex en la lista
  */
 int n_mutexs=0;
-
-/*
- * Variable global que contea para crear los id de los mutex
- */
-int cont_m=0;
 
 /*
  * Variable global que identifica el proceso actual
@@ -99,7 +86,7 @@ BCP * p_proc_actual=NULL;
 BCP tabla_procs[MAX_PROC];
 
 /*
- * Variable global que representa la tabla de procesos
+ * I. Variable global que representa la tabla de procesos
  */
 
 MUTEX tabla_mutexs[NUM_MUT];
@@ -110,12 +97,12 @@ MUTEX tabla_mutexs[NUM_MUT];
 lista_BCPs lista_listos= {NULL, NULL};
 
 /*
- * Variable global que representa la cola de procesos dormido
+ * I. Variable global que representa la cola de procesos dormido
  */
 lista_BCPs lista_dormidos= {NULL, NULL};
 
 /*
- * Variable global que represental la cola de procesos bloqueados por mutex
+ * I. Variable global que represental la cola de procesos bloqueados por mutex
  */
 lista_BCPs lista_bloqueados= {NULL,NULL};
 
