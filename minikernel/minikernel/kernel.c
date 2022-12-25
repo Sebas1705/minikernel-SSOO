@@ -346,6 +346,46 @@ static int buscarMutexLibre(){
 	return -1;
 }
 
+static void cambioProcesoAListo(lista_BCPs origen){
+	//Guardamos y elevamos el nivel de interrupcion:
+	int nivel_int = fijar_nivel_int(NIVEL_3);
+
+	//Ponemos a listo el proceso que esta esperando:
+	BCP* proc_aux = origen.primero;
+	proc_aux->estado = LISTO;
+
+	//Lo pasamos de la lista de bloqueados a la de listos:
+	eliminar_primero(&origen); 
+	insertar_ultimo(&lista_listos,proc_aux);
+
+	//Volvemos al nivel de interrupcion:
+	fijar_nivel_int(nivel_int);
+}
+
+static void cambioProcesoABloqueado(lista_BCPs destino,char* msg){
+	//Elevar nivel interrupcion y guardar actual:
+	int nivel=fijar_nivel_int(NIVEL_3);
+	//Cambiar estado a bloqueado:
+	p_proc_actual->estado=BLOQUEADO;
+	//Guardamos el proceso:
+	BCP* p_proc_bloqueado = p_proc_actual; 
+					
+	//Eliminamos de la lista de listos:
+	eliminar_primero(&lista_listos);
+	//Lo insertamos en la lista de bloqueado:
+	insertar_ultimo(&destino, p_proc_bloqueado);
+
+	//Llamamos al planificador para el nuevo proceso actual:
+	p_proc_actual=planificador();
+					
+	//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+	printk("\x1b[32m""-> C.CONTEXTO POR %s: de %d a %d\n""\x1b[0m",msg,p_proc_bloqueado->id,p_proc_actual->id);
+	cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
+
+	//Volvemos al nivel de int anterior:
+	fijar_nivel_int(nivel);
+}
+
 /*
  *
  * Rutinas que llevan a cabo las llamadas al sistema
@@ -408,7 +448,6 @@ int sis_dormir(){
 	//Leer de los registros los segundos:
 	unsigned int segundos=(unsigned int)leer_registro(1); 
 
-
 	//Elevar nivel interrupcion y guardar actual:
 	int nivel=fijar_nivel_int(NIVEL_3);
 	//Cambiar estado a bloqueado:
@@ -427,6 +466,7 @@ int sis_dormir(){
 	p_proc_actual=planificador();
 	
 	//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+	printk("\x1b[32m""-> C.CONTEXTO POR DORMIR: de %d a %d\n""\x1b[0m", p_proc_dormido->id, p_proc_actual->id);
 	cambio_contexto(&(p_proc_dormido->contexto_regs), &(p_proc_actual->contexto_regs));
 
 	//Volvemos al nivel de int anterior:
@@ -436,6 +476,12 @@ int sis_dormir(){
 }
 
 /*I. Funcion que crea un mutex */
+/**
+ * ERRORES:
+ * -1: El nombre excede del limite de longitud.
+ * -2: No hay descriptor libre en el proceso.
+ * -3: Ya existe el nombre.
+*/
 int sis_crear_mutex(){
 	
 	//1.Comprobamos que el tamaño del nombre es menor al maximo;
@@ -463,28 +509,7 @@ int sis_crear_mutex(){
 	int mutexLibre = buscarMutexLibre();
 	while(mutexLibre==-1){
 		printk("\x1b[31m""[SIS_CREAR_MUTEX] - No hay mutex libre, bloqueando proceso %d - %d\n""\x1b[0m",p_proc_actual->id, mutexLibre);
-		//Elevar nivel interrupcion y guardar actual:
-		int nivel=fijar_nivel_int(NIVEL_3);
-		//Cambiar estado a bloqueado:
-		p_proc_actual->estado=BLOQUEADO;
-		//Guardamos el proceso:
-		BCP* p_proc_bloqueado = p_proc_actual; 
-		
-		//Eliminamos de la lista de listos:
-		eliminar_primero(&lista_listos);
-		//Lo insertamos en la lista de bloqueado:
-		insertar_ultimo(&lista_bloqueados, p_proc_bloqueado);
-
-		//Llamamos al planificador para el nuevo proceso actual:
-		p_proc_actual=planificador();
-		
-		//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
-		printk("CAMBIO CONTEXTO DE %d A %d\n", p_proc_bloqueado->id, p_proc_actual->id);
-		cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
-
-		//Volvemos al nivel de int anterior:
-		fijar_nivel_int(nivel);
-
+		cambioProcesoABloqueado(lista_bloqueados,"MUTEX NO LIBRE");
 		mutexLibre=buscarMutexLibre();
 	}
 
@@ -497,6 +522,8 @@ int sis_crear_mutex(){
 	m.procesos_bloqueados_lock.ultimo=NULL;
 	m.estado=0;/*No bloqueado*/
 	m.abierto=0;/*Cerrado*/
+	m.nProcesosBloqueados=0;
+	m.id_proc_propietario=-1;
 
 	//Guardamos el descriptor en el array:
 	p_proc_actual->descriptores_mutex[posLibre]=mutexLibre;
@@ -510,6 +537,11 @@ int sis_crear_mutex(){
 	return mutexLibre;
 }
 /*I. Funcion que abre un mutex */
+/**
+ * ERRORES:
+ * -1: El nombre no existe.
+ * -2: No hay descriptor libre en el proceso.
+*/
 int sis_abrir_mutex(){
 	
 	//1.Comprobamos que existe el mutex:
@@ -535,20 +567,205 @@ int sis_abrir_mutex(){
 	}
 
 	//Abrimos el mutex:
-	tabla_mutexs[des].abierto=1;
+	tabla_mutexs[des].abierto++;
 	printk("Abierto mutex con descriptor %d, por el proceso %d\n", des, p_proc_actual->id);
 	return des;
 }
 /*I. Funcion que bloquea el proceso */
+/**
+ * ERRORES:
+ * -1: El descriptor se sale del rango posible.
+ * -2: El mutex no esta abierto.
+ * -3: El mutex no recursivo ya fue bloqueado por el mismo proceso.
+*/
 int sis_lock(){
+
+	//1.Comprobamos que el descritor esta dentro del rango:
+	unsigned int des=(unsigned int)leer_registro(1);
+	if(des>=NUM_MUT){
+		printk("\x1b[31m""[SIS_LOCK] - El descriptor no existe dentro del rango 0-%d\n""\x1b[0m",NUM_MUT);
+		return -1;
+	}
+
+	//2.Comprobamos que el descriptor pertenece a un mutex abierto:
+	if(tabla_mutexs[des].abierto==0){
+		printk("\x1b[31m""[SIS_LOCK] - El descriptor apunta a un mutex que no esta abierto\n""\x1b[0m",NUM_MUT);
+		return -2;
+	}
+
+	int proc_esperando=1;
+	while (proc_esperando){
+	    //Si ya esta bloqueado:
+		if(tabla_mutexs[des].estado>0){
+			//Si es recursivo:
+			if(tabla_mutexs[des].tipo==1){
+				//Si ha sido bloqueado por el mismo proceso:
+				if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id) {
+					//El proceso se puede volver a bloquear:
+					tabla_mutexs[des].estado++;
+					proc_esperando=0;
+				}
+				//Si no es el mismo proceso:
+				else cambioProcesoABloqueado(tabla_mutexs[des].procesos_bloqueados_lock,"BLOQUEO");
+			}
+			//Si no es recursivo: 
+			else{
+				//Si el mutex fue bloqueado por este proceso:
+				//3.Comprobar si ha sido bloqueado por el proceso actual
+				if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){				
+					//El proceso actual ha bloqueado el mutex antes -> interbloqueo
+					printk("\x1b[31m""[SIS_LOCK] - El proceso ya ha sido bloqueado por este mutex no recursivo\n""\x1b[0m");
+					return -3;
+				}
+				//Si el mutex no fue bloqueado por este proceso:
+				else cambioProcesoABloqueado(tabla_mutexs[des].procesos_bloqueados_lock,"BLOQUEO");
+			}
+		}
+		//Si no esta bloqueado:
+		else {
+			tabla_mutexs[des].estado++;
+			proc_esperando=0;
+		} 
+	}
+
+	//Se asigna el propietario a este proceso:
+	tabla_mutexs[des].id_proc_propietario=p_proc_actual->id;
+	printk("Lock realizado sobre mutex con id=%d, por el proceso\n",des,p_proc_actual->id);
+
 	return 0;
 }
+
 /*I. Funcion que desbloquea el proceso pasandole el id del mutex */
+/**
+ * ERRORES:
+ * -1: El descriptor se sale del rango posible.
+ * -2: El mutex no esta abierto.
+ * -3: Proceso no propietario intenta desbloquear.
+ * -4: Mutex no esta bloqueado.
+*/
 int sis_unlock(){
+
+	//1.Comprobamos que el descritor esta dentro del rango:
+	unsigned int des=(unsigned int)leer_registro(1);
+	if(des>=NUM_MUT){
+		printk("\x1b[31m""[SIS_UNLOCK] - El descriptor no existe dentro del rango 0-%d\n""\x1b[0m",NUM_MUT);
+		return -1;
+	}
+
+	//2.Comprobamos que el descriptor pertenece a un mutex abierto:
+	if(tabla_mutexs[des].abierto==0){
+		printk("\x1b[31m""[SIS_UNLOCK] - El descriptor apunta a un mutex que no esta abierto\n""\x1b[0m",NUM_MUT);
+		return -2;
+	}
+
+	//Si esta bloqueado:
+	if(tabla_mutexs[des].estado>0){
+		//Si es recursivo:
+		if(tabla_mutexs[des].tipo==1){
+			//Si ha sido bloqueado por el proceso actual:
+			if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){
+				//Desbloqueamos:
+				tabla_mutexs[des].estado--;
+				//Comprobamos si ya no esta bloqueado:
+				if(tabla_mutexs[des].estado==0){
+					//Si hay algun proceso esperando el mutex por lock, se le desbloquea
+					if(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL){
+						cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
+						printk("Se ha desbloqueado el proceso %d\n", tabla_mutexs[des].procesos_bloqueados_lock.primero->id);
+					}
+					//Eliminamos al propietario del mutex:
+					tabla_mutexs[des].id_proc_propietario=-1;
+				}
+			}
+			//3.Si este proceso no es el propietario, no puede desbloquear:
+			else{
+				printk("\x1b[31m""[SIS_UNLOCK] - Proceso no propietario intenta desbloquear\n""\x1b[0m",NUM_MUT);
+				return -3;
+			} 
+		} 
+		//Si no es recursivo:
+		else {
+			//Si es propietario el proceso actual:
+			if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){
+				//Desbloquear:
+				tabla_mutexs[des].estado--;
+				//Eliminar al propietario:
+				tabla_mutexs[des].id_proc_propietario=-1;
+				//Si hay procesos bloqueados:
+				if(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL){
+					cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
+					printk("Se ha desbloqueado el proceso %d\n", tabla_mutexs[des].procesos_bloqueados_lock.primero->id);
+				}
+			}
+			//Si no es propietario:
+			else{
+				printk("\x1b[31m""[SIS_UNLOCK] - Proceso no propietario intenta desbloquear\n""\x1b[0m",NUM_MUT);
+				return -3;
+			}
+		}
+	}
+	//Si no esta bloqueado:
+	else {
+		printk("\x1b[31m""[SIS_UNLOCK] - Mutex no esta bloqueado\n""\x1b[0m",NUM_MUT);
+		return -4;
+	}
+
+	printk("Unlock realizado correctamente sobre el mutex con id=%d, por el proceso %d\n",des,p_proc_actual->id);
 	return 0;
 }
 /*I. Funcion que cierra el mutex pasandole el id del mutex */
+/**
+ * ERRORES:
+ * -1: El descriptor se sale del rango posible.
+ * -2: El mutex no esta abierto.
+ * -3: Proceso no propietario intenta desbloquear.
+ * -4: Mutex no esta bloqueado.
+*/
 int sis_cerrar_mutex(){
+	
+	//1.Comprobamos que el descritor esta dentro del rango:
+	unsigned int des=(unsigned int)leer_registro(1);
+	if(des>=NUM_MUT){
+		printk("\x1b[31m""[SIS_UNLOCK] - El descriptor no existe dentro del rango 0-%d\n""\x1b[0m",NUM_MUT);
+		return -1;
+	}
+
+	//2.Comprobamos que el descriptor pertenece a un mutex abierto:
+	if(tabla_mutexs[des].abierto==0){
+		printk("\x1b[31m""[SIS_UNLOCK] - El descriptor apunta a un mutex que no esta abierto\n""\x1b[0m",NUM_MUT);
+		return -2;
+	}
+
+	//Se busca en los descriptores del proceso:
+    int posDes=existeNombreDes(tabla_mutexs[des].nombre);
+
+	//Una vez encontrado, se libera:
+	p_proc_actual->descriptores_mutex[posDes]=-1;
+
+	//Si esta bloqueado se desbloquea:
+	if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){
+		tabla_mutexs[des].estado=0;
+
+		//Si hay procesos bloqueados se desbloquean todos:
+		while(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL) {
+			cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
+		}
+	
+	}
+	tabla_mutexs[des].abierto--;
+	
+	//Si no hay otros procesos que hayan abierto el mutex, este desaparece
+	if(tabla_mutexs[des].abierto==0) {
+		n_mutexs--;
+		
+		//Desbloqueamos todos lo procesos que hayan sido bloqueados por el maximo de mutexs:
+		//Ya que tiene que comprobar de nuevo si pueden crear un mutex.
+		while(lista_bloqueados.primero!=NULL) {
+			cambioProcesoAListo(lista_bloqueados);
+		}
+	}
+
+	printk("Se cerro el mutex con descriptor %d, por el proceso %d\n",des,p_proc_actual->id);
 	return 0;
 }
 
