@@ -106,7 +106,7 @@ lista_BCPs lista_dormidos= {NULL, NULL};
 /*
  * I. Variable global que represental la cola de procesos bloqueados por mutex
  */
-lista_BCPs lista_bloqueados= {NULL,NULL};
+lista_BCPs lista_bloqueados= {NULL, NULL};
 
 /*
  *

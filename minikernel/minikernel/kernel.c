@@ -136,16 +136,17 @@ static void liberar_proceso(){
 
 	p_proc_actual->estado=TERMINADO;
 	eliminar_primero(&lista_listos); /* proc. fuera de listos */
-
 	/* Realizar cambio de contexto */
 	p_proc_anterior=p_proc_actual;
 	p_proc_actual=planificador();
 
-	printk("-> C.CONTEXTO POR FIN: de %d a %d\n",
+	printk("\x1b[32m""-> C.CONTEXTO POR FIN: de %d a %d\n""\x1b[0m",
 			p_proc_anterior->id, p_proc_actual->id);
+	
 
 	liberar_pila(p_proc_anterior->pila);
 	cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
+	
         return; /* no deber�a llegar aqui */
 }
 
@@ -169,7 +170,7 @@ static void exc_arit(){
 		panico("excepcion aritmetica cuando estaba dentro del kernel");
 
 
-	printk("-> EXCEPCION ARITMETICA EN PROC %d\n", p_proc_actual->id);
+	printk("\x1b[32m""-> EXCEPCION ARITMETICA EN PROC %d\n""\x1b[0m", p_proc_actual->id);
 	liberar_proceso();
 
         return; /* no deber�a llegar aqui */
@@ -184,7 +185,7 @@ static void exc_mem(){
 		panico("excepcion de memoria cuando estaba dentro del kernel");
 
 
-	printk("-> EXCEPCION DE MEMORIA EN PROC %d\n", p_proc_actual->id);
+	printk("\x1b[32m""-> EXCEPCION DE MEMORIA EN PROC %d\n""\x1b[0m", p_proc_actual->id);
 	liberar_proceso();
 
         return; /* no deber�a llegar aqui */
@@ -197,7 +198,7 @@ static void int_terminal(){
 	char car;
 
 	car = leer_puerto(DIR_TERMINAL);
-	printk("-> TRATANDO INT. DE TERMINAL %c\n", car);
+	printk("\x1b[32m""-> TRATANDO INT. DE TERMINAL %c\n""\x1b[0m", car);
 
         return;
 }
@@ -254,7 +255,7 @@ static void tratar_llamsis(){
  */
 static void int_sw(){
 
-	printk("-> TRATANDO INT. SW\n");
+	printk("\x1b[32m""-> TRATANDO INT. SW\n""\x1b[0m");
 
 	return;
 }
@@ -346,44 +347,58 @@ static int buscarMutexLibre(){
 	return -1;
 }
 
-static void cambioProcesoAListo(lista_BCPs origen){
-	//Guardamos y elevamos el nivel de interrupcion:
-	int nivel_int = fijar_nivel_int(NIVEL_3);
+static int cerrarMutex(unsigned int des, unsigned int posDes){
+	//Una vez encontrado, se libera:
+	p_proc_actual->descriptores_mutex[posDes]=-1;
+	//Si esta bloqueado se desbloquea:
+	if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){
+		tabla_mutexs[des].estado=0;
+		printk("\x1b[33m""#>\t""\x1b[0m""Unlock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
 
-	//Ponemos a listo el proceso que esta esperando:
-	BCP* proc_aux = origen.primero;
-	proc_aux->estado = LISTO;
+		//Si hay procesos bloqueados se desbloquean todos:
+		while(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL) {
+			//Guardamos y elevamos el nivel de interrupcion:
+			int nivel_int = fijar_nivel_int(NIVEL_3);
 
-	//Lo pasamos de la lista de bloqueados a la de listos:
-	eliminar_primero(&origen); 
-	insertar_ultimo(&lista_listos,proc_aux);
+			//Ponemos a listo el proceso que esta esperando:
+			BCP* proc_aux = tabla_mutexs[des].procesos_bloqueados_lock.primero;
+			proc_aux->estado = LISTO;
 
-	//Volvemos al nivel de interrupcion:
-	fijar_nivel_int(nivel_int);
-}
+			//Lo pasamos de la lista de bloqueados a la de listos:
+			eliminar_primero(&(tabla_mutexs[des].procesos_bloqueados_lock)); 
+			insertar_ultimo(&lista_listos,proc_aux);
 
-static void cambioProcesoABloqueado(lista_BCPs destino,char* msg){
-	//Elevar nivel interrupcion y guardar actual:
-	int nivel=fijar_nivel_int(NIVEL_3);
-	//Cambiar estado a bloqueado:
-	p_proc_actual->estado=BLOQUEADO;
-	//Guardamos el proceso:
-	BCP* p_proc_bloqueado = p_proc_actual; 
-					
-	//Eliminamos de la lista de listos:
-	eliminar_primero(&lista_listos);
-	//Lo insertamos en la lista de bloqueado:
-	insertar_ultimo(&destino, p_proc_bloqueado);
+			//Volvemos al nivel de interrupcion:
+			fijar_nivel_int(nivel_int);
+		}
+	
+	}
+	tabla_mutexs[des].abierto--;
+	
+	//Si no hay otros procesos que hayan abierto el mutex, este desaparece
+	if(tabla_mutexs[des].abierto==0) {
+		tabla_mutexs[des].creado=0;
+		n_mutexs--;
+		//Desbloqueamos todos lo procesos que hayan sido bloqueados por el maximo de mutexs:
+		//Ya que tiene que comprobar de nuevo si pueden crear un mutex.
+		while(lista_bloqueados.primero!=NULL) {
+			//Guardamos y elevamos el nivel de interrupcion:
+			int nivel_int = fijar_nivel_int(NIVEL_3);
 
-	//Llamamos al planificador para el nuevo proceso actual:
-	p_proc_actual=planificador();
-					
-	//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
-	printk("\x1b[32m""-> C.CONTEXTO POR %s: de %d a %d\n""\x1b[0m",msg,p_proc_bloqueado->id,p_proc_actual->id);
-	cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
+			//Ponemos a listo el proceso que esta esperando:
+			BCP* proc_aux = lista_bloqueados.primero;
+			proc_aux->estado = LISTO;
 
-	//Volvemos al nivel de int anterior:
-	fijar_nivel_int(nivel);
+			//Lo pasamos de la lista de bloqueados a la de listos:
+			eliminar_primero(&lista_bloqueados); 
+			insertar_ultimo(&lista_listos,proc_aux);
+
+			//Volvemos al nivel de interrupcion:
+			fijar_nivel_int(nivel_int);
+		}
+	}
+	printk("\x1b[33m""#>\t""\x1b[0m""Cerrado: des->%d, proc_id->%d (A:%d)(N:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].abierto,n_mutexs);
+	return 0;
 }
 
 /*
@@ -401,7 +416,7 @@ int sis_crear_proceso(){
 	char *prog;
 	int res;
 
-	printk("-> PROC %d: CREAR PROCESO\n", p_proc_actual->id);
+	printk("\x1b[32m""-> PROC %d: CREAR PROCESO\n""\x1b[0m", p_proc_actual->id);
 	prog=(char *)leer_registro(1);
 	printk("PROG: %s\n", prog);
 	res=crear_tarea(prog);
@@ -430,7 +445,14 @@ int sis_escribir()
  */
 int sis_terminar_proceso(){
 
-	printk("-> FIN PROCESO %d\n", p_proc_actual->id);
+	//Cerramos todos los mutex:
+	for (int i=0;i<NUM_MUT_PROC;i++){
+		if (p_proc_actual->descriptores_mutex[i]!=-1){
+			cerrarMutex(p_proc_actual->descriptores_mutex[i],i);
+		}
+	}
+		
+	printk("\x1b[32m""-> FIN PROCESO %d\n""\x1b[0m", p_proc_actual->id);
 
 	liberar_proceso();
 
@@ -508,8 +530,28 @@ int sis_crear_mutex(){
 	//Comprobamos que se puede crear un mutex si no lo bloqueamos:
 	int mutexLibre = buscarMutexLibre();
 	while(mutexLibre==-1){
-		printk("\x1b[31m""[SIS_CREAR_MUTEX] - No hay mutex libre, bloqueando proceso %d - %d\n""\x1b[0m",p_proc_actual->id, mutexLibre);
-		cambioProcesoABloqueado(lista_bloqueados,"MUTEX NO LIBRE");
+		printk("\x1b[31m""[SIS_CREAR_MUTEX] - No hay mutex libre, bloqueando el proceso %d\n""\x1b[0m",p_proc_actual->id);
+		//Elevar nivel interrupcion y guardar actual:
+		int nivel=fijar_nivel_int(NIVEL_3);
+		//Cambiar estado a bloqueado:
+		p_proc_actual->estado=BLOQUEADO;
+		//Guardamos el proceso:
+		BCP* p_proc_bloqueado = p_proc_actual; 
+						
+		//Eliminamos de la lista de listos:
+		eliminar_primero(&lista_listos);
+		//Lo insertamos en la lista de bloqueado:
+		insertar_ultimo(&lista_bloqueados, p_proc_bloqueado);
+
+		//Llamamos al planificador para el nuevo proceso actual:
+		p_proc_actual=planificador();
+						
+		//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+		printk("\x1b[32m""-> C.CONTEXTO POR MUTEX NO LIBRE: de %d a %d\n""\x1b[0m",p_proc_bloqueado->id,p_proc_actual->id);
+		cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
+
+		//Volvemos al nivel de int anterior:
+		fijar_nivel_int(nivel);
 		mutexLibre=buscarMutexLibre();
 	}
 
@@ -521,7 +563,7 @@ int sis_crear_mutex(){
 	m.procesos_bloqueados_lock.primero=NULL;
 	m.procesos_bloqueados_lock.ultimo=NULL;
 	m.estado=0;/*No bloqueado*/
-	m.abierto=0;/*Cerrado*/
+	m.abierto=1;/*Abierto*/
 	m.nProcesosBloqueados=0;
 	m.id_proc_propietario=-1;
 
@@ -532,8 +574,7 @@ int sis_crear_mutex(){
 	tabla_mutexs[mutexLibre]=m;
 	n_mutexs++;
 
-	printk("Creado mutex con descriptor %d, total mutexs: %d\n", mutexLibre, n_mutexs);
-
+	printk("\x1b[33m""#>\t""\x1b[0m""Creado: des->%d, proc_id->%d (A:%d)(N:%d)\n",mutexLibre,p_proc_actual->id,tabla_mutexs[mutexLibre].abierto,n_mutexs);
 	return mutexLibre;
 }
 /*I. Funcion que abre un mutex */
@@ -568,7 +609,7 @@ int sis_abrir_mutex(){
 
 	//Abrimos el mutex:
 	tabla_mutexs[des].abierto++;
-	printk("Abierto mutex con descriptor %d, por el proceso %d\n", des, p_proc_actual->id);
+	printk("\x1b[33m""#>\t""\x1b[0m""Abierto: des->%d, proc_id->%d (A:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].abierto);
 	return des;
 }
 /*I. Funcion que bloquea el proceso */
@@ -606,7 +647,31 @@ int sis_lock(){
 					proc_esperando=0;
 				}
 				//Si no es el mismo proceso:
-				else cambioProcesoABloqueado(tabla_mutexs[des].procesos_bloqueados_lock,"BLOQUEO");
+				else{
+					printk("\x1b[33m""#>\t""\x1b[0m""Block: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+					//Elevar nivel interrupcion y guardar actual:
+					int nivel=fijar_nivel_int(NIVEL_3);
+					//Cambiar estado a bloqueado:
+					p_proc_actual->estado=BLOQUEADO;
+							
+					//Eliminamos de la lista de listos:
+					eliminar_primero(&lista_listos);
+					//Lo insertamos en la lista de bloqueado:
+					insertar_ultimo(&(tabla_mutexs[des].procesos_bloqueados_lock), p_proc_actual);
+					
+					//Guardamos el proceso:
+					BCP* p_proc_bloqueado = p_proc_actual; 
+					//Llamamos al planificador para el nuevo proceso actual:
+					p_proc_actual=planificador();
+									
+					//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+					printk("\x1b[32m""-> C.CONTEXTO POR BLOQUEO: de %d a %d\n""\x1b[0m",p_proc_bloqueado->id,p_proc_actual->id);
+					cambio_contexto(&(p_proc_bloqueado->contexto_regs),&(p_proc_actual->contexto_regs));
+		
+					//Volvemos al nivel de int anterior:
+					fijar_nivel_int(nivel);
+					
+				}
 			}
 			//Si no es recursivo: 
 			else{
@@ -618,7 +683,30 @@ int sis_lock(){
 					return -3;
 				}
 				//Si el mutex no fue bloqueado por este proceso:
-				else cambioProcesoABloqueado(tabla_mutexs[des].procesos_bloqueados_lock,"BLOQUEO");
+				else{
+					printk("\x1b[33m""#>\t""\x1b[0m""Block: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+					//Elevar nivel interrupcion y guardar actual:
+					int nivel=fijar_nivel_int(NIVEL_3);
+					//Cambiar estado a bloqueado:
+					p_proc_actual->estado=BLOQUEADO;
+					//Guardamos el proceso:
+					BCP* p_proc_bloqueado = p_proc_actual; 
+									
+					//Eliminamos de la lista de listos:
+					eliminar_primero(&lista_listos);
+					//Lo insertamos en la lista de bloqueado:
+					insertar_ultimo(&(tabla_mutexs[des].procesos_bloqueados_lock), p_proc_bloqueado);
+
+					//Llamamos al planificador para el nuevo proceso actual:
+					p_proc_actual=planificador();
+									
+					//Hacemos un cambio de contexto, guardando el contexto del proceso dormido:
+					printk("\x1b[32m""-> C.CONTEXTO POR BLOQUEO: de %d a %d\n""\x1b[0m",p_proc_bloqueado->id,p_proc_actual->id);
+					cambio_contexto(&(p_proc_bloqueado->contexto_regs), &(p_proc_actual->contexto_regs));
+
+					//Volvemos al nivel de int anterior:
+					fijar_nivel_int(nivel);
+				}
 			}
 		}
 		//Si no esta bloqueado:
@@ -630,7 +718,7 @@ int sis_lock(){
 
 	//Se asigna el propietario a este proceso:
 	tabla_mutexs[des].id_proc_propietario=p_proc_actual->id;
-	printk("Lock realizado sobre mutex con id=%d, por el proceso\n",des,p_proc_actual->id);
+	printk("\x1b[33m""#>\t""\x1b[0m""Lock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
 
 	return 0;
 }
@@ -670,8 +758,20 @@ int sis_unlock(){
 				if(tabla_mutexs[des].estado==0){
 					//Si hay algun proceso esperando el mutex por lock, se le desbloquea
 					if(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL){
-						cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
-						printk("Se ha desbloqueado el proceso %d\n", tabla_mutexs[des].procesos_bloqueados_lock.primero->id);
+						//Guardamos y elevamos el nivel de interrupcion:
+						int nivel_int = fijar_nivel_int(NIVEL_3);
+
+						//Ponemos a listo el proceso que esta esperando:
+						BCP* proc_aux = tabla_mutexs[des].procesos_bloqueados_lock.primero;
+						proc_aux->estado = LISTO;
+
+						//Lo pasamos de la lista de bloqueados a la de listos:
+						eliminar_primero(&tabla_mutexs[des].procesos_bloqueados_lock); 
+						insertar_ultimo(&lista_listos,proc_aux);
+
+						//Volvemos al nivel de interrupcion:
+						fijar_nivel_int(nivel_int);
+						printk("\x1b[33m""#>\t""\x1b[0m""Unblock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
 					}
 					//Eliminamos al propietario del mutex:
 					tabla_mutexs[des].id_proc_propietario=-1;
@@ -693,8 +793,20 @@ int sis_unlock(){
 				tabla_mutexs[des].id_proc_propietario=-1;
 				//Si hay procesos bloqueados:
 				if(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL){
-					cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
-					printk("Se ha desbloqueado el proceso %d\n", tabla_mutexs[des].procesos_bloqueados_lock.primero->id);
+					//Guardamos y elevamos el nivel de interrupcion:
+					int nivel_int = fijar_nivel_int(NIVEL_3);
+
+					//Ponemos a listo el proceso que esta esperando:
+					BCP* proc_aux = tabla_mutexs[des].procesos_bloqueados_lock.primero;
+					proc_aux->estado = LISTO;
+
+					//Lo pasamos de la lista de bloqueados a la de listos:
+					eliminar_primero(&tabla_mutexs[des].procesos_bloqueados_lock); 
+					insertar_ultimo(&lista_listos,proc_aux);
+
+					//Volvemos al nivel de interrupcion:
+					fijar_nivel_int(nivel_int);
+					printk("\x1b[33m""#>\t""\x1b[0m""Unblock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
 				}
 			}
 			//Si no es propietario:
@@ -710,7 +822,7 @@ int sis_unlock(){
 		return -4;
 	}
 
-	printk("Unlock realizado correctamente sobre el mutex con id=%d, por el proceso %d\n",des,p_proc_actual->id);
+	printk("\x1b[33m""#>\t""\x1b[0m""Unlock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
 	return 0;
 }
 /*I. Funcion que cierra el mutex pasandole el id del mutex */
@@ -738,35 +850,7 @@ int sis_cerrar_mutex(){
 
 	//Se busca en los descriptores del proceso:
     int posDes=existeNombreDes(tabla_mutexs[des].nombre);
-
-	//Una vez encontrado, se libera:
-	p_proc_actual->descriptores_mutex[posDes]=-1;
-
-	//Si esta bloqueado se desbloquea:
-	if(tabla_mutexs[des].id_proc_propietario==p_proc_actual->id){
-		tabla_mutexs[des].estado=0;
-
-		//Si hay procesos bloqueados se desbloquean todos:
-		while(tabla_mutexs[des].procesos_bloqueados_lock.primero!=NULL) {
-			cambioProcesoAListo(tabla_mutexs[des].procesos_bloqueados_lock);
-		}
-	
-	}
-	tabla_mutexs[des].abierto--;
-	
-	//Si no hay otros procesos que hayan abierto el mutex, este desaparece
-	if(tabla_mutexs[des].abierto==0) {
-		n_mutexs--;
-		
-		//Desbloqueamos todos lo procesos que hayan sido bloqueados por el maximo de mutexs:
-		//Ya que tiene que comprobar de nuevo si pueden crear un mutex.
-		while(lista_bloqueados.primero!=NULL) {
-			cambioProcesoAListo(lista_bloqueados);
-		}
-	}
-
-	printk("Se cerro el mutex con descriptor %d, por el proceso %d\n",des,p_proc_actual->id);
-	return 0;
+	return cerrarMutex(des,posDes);
 }
 
 /*
