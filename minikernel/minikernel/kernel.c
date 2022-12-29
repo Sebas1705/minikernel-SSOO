@@ -13,9 +13,8 @@
  *
  */
 
-#include "kernel.h"	/* Contiene defs. usadas por este modulo */
+#include "minikernel/minikernel/include/kernel.h"	/* Contiene defs. usadas por este modulo */
 #include "string.h"
-#include "stdlib.h"
 /*
  *
  * Funciones relacionadas con la tabla de procesos:
@@ -297,7 +296,9 @@ static int crear_tarea(char *prog){
 		}
 
 		/* lo inserta al final de cola de listos */
+		int level = fijar_nivel_int(NIVEL_3);
 		insertar_ultimo(&lista_listos, p_proc);
+		fijar_nivel_int(level);
 		error= 0;
 	}
 	else

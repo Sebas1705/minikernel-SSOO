@@ -37,10 +37,10 @@ ALGO COMENTE ESTA PARTE Y DESCOMENTE LA PRUEBA CORRESPONDIENTE */
 
 	if (crear_proceso("excep_arit")<0)
 		printf("Error creando excep_arit\n");
-
-	if (crear_proceso("excep_mem")<0)
-		printf("Error creando excep_mem\n");
-	
+	*/
+	// if (crear_proceso("excep_mem")<0)
+	// 	printf("Error creando excep_mem\n");
+	/*
 	if (crear_proceso("noexiste")<0)
 		printf("Error creando noexiste\n");
 	*/
