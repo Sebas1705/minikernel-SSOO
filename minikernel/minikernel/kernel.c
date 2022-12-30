@@ -13,7 +13,7 @@
  *
  */
 
-#include "minikernel/minikernel/include/kernel.h"	/* Contiene defs. usadas por este modulo */
+#include "kernel.h"	/* Contiene defs. usadas por este modulo */
 #include "string.h"
 /*
  *
