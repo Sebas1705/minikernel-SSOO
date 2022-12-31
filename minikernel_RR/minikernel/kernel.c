@@ -427,10 +427,12 @@ static int cerrarMutex(unsigned int des, unsigned int posDes){
 	
 	}
 	tabla_mutexs[des].abierto--;
-	
+	char *nombre=(char*)malloc(sizeof(char)*MAX_NOM_MUT);
 	//Si no hay otros procesos que hayan abierto el mutex, este desaparece
 	if(tabla_mutexs[des].abierto==0) {
 		tabla_mutexs[des].creado=0;
+		strcpy(nombre,tabla_mutexs[des].nombre);
+		strcpy(tabla_mutexs[des].nombre,"       ");
 		n_mutexs--;
 		//Desbloqueamos todos lo procesos que hayan sido bloqueados por el maximo de mutexs:
 		//Ya que tiene que comprobar de nuevo si pueden crear un mutex.
@@ -450,7 +452,7 @@ static int cerrarMutex(unsigned int des, unsigned int posDes){
 			fijar_nivel_int(nivel_int);
 		}
 	}
-	printk("\x1b[33m""#>\t""\x1b[0m""Cerrado: des->%d, proc_id->%d (A:%d)(N:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].abierto,n_mutexs);
+	printk("\x1b[33m""#>\t""\x1b[0m""Cerrado %s: des->%d, proc_id->%d (A:%d)(N:%d)\n",nombre,des,p_proc_actual->id,tabla_mutexs[des].abierto,n_mutexs);
 	return 0;
 }
 
@@ -610,14 +612,13 @@ int sis_crear_mutex(){
 
 	//Inicializamos todos los aspectos del mutex:
 	MUTEX m;
-	m.nombre=nombre;
+	strcpy(m.nombre,nombre);
 	m.tipo=(int)leer_registro(2);
 	m.creado=1;/*Creado*/
 	m.procesos_bloqueados_lock.primero=NULL;
 	m.procesos_bloqueados_lock.ultimo=NULL;
 	m.estado=0;/*No bloqueado*/
 	m.abierto=1;/*Abierto*/
-	m.nProcesosBloqueados=0;
 	m.id_proc_propietario=-1;
 
 	//Guardamos el descriptor en el array:
@@ -627,7 +628,7 @@ int sis_crear_mutex(){
 	tabla_mutexs[mutexLibre]=m;
 	n_mutexs++;
 
-	printk("\x1b[33m""#>\t""\x1b[0m""Creado: des->%d, proc_id->%d (A:%d)(N:%d)\n",mutexLibre,p_proc_actual->id,tabla_mutexs[mutexLibre].abierto,n_mutexs);
+	printk("\x1b[33m""#>\t""\x1b[0m""Creado %s: des->%d, proc_id->%d (A:%d)(N:%d)\n",tabla_mutexs[mutexLibre].nombre,mutexLibre,p_proc_actual->id,tabla_mutexs[mutexLibre].abierto,n_mutexs);
 	return mutexLibre;
 }
 /*I. Funcion que abre un mutex */
@@ -662,7 +663,7 @@ int sis_abrir_mutex(){
 
 	//Abrimos el mutex:
 	tabla_mutexs[des].abierto++;
-	printk("\x1b[33m""#>\t""\x1b[0m""Abierto: des->%d, proc_id->%d (A:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].abierto);
+	printk("\x1b[33m""#>\t""\x1b[0m""Abierto %s: des->%d, proc_id->%d (A:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].abierto);
 	return des;
 }
 /*I. Funcion que bloquea el proceso */
@@ -701,7 +702,7 @@ int sis_lock(){
 				}
 				//Si no es el mismo proceso:
 				else{
-					printk("\x1b[33m""#>\t""\x1b[0m""Block: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+					printk("\x1b[33m""#>\t""\x1b[0m""Block %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 					//Elevar nivel interrupcion y guardar actual:
 					int nivel=fijar_nivel_int(NIVEL_3);
 					//Cambiar estado a bloqueado:
@@ -737,7 +738,7 @@ int sis_lock(){
 				}
 				//Si el mutex no fue bloqueado por este proceso:
 				else{
-					printk("\x1b[33m""#>\t""\x1b[0m""Block: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+					printk("\x1b[33m""#>\t""\x1b[0m""Block %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 					//Elevar nivel interrupcion y guardar actual:
 					int nivel=fijar_nivel_int(NIVEL_3);
 					//Cambiar estado a bloqueado:
@@ -771,7 +772,7 @@ int sis_lock(){
 
 	//Se asigna el propietario a este proceso:
 	tabla_mutexs[des].id_proc_propietario=p_proc_actual->id;
-	printk("\x1b[33m""#>\t""\x1b[0m""Lock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+	printk("\x1b[33m""#>\t""\x1b[0m""Lock %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 
 	return 0;
 }
@@ -824,7 +825,7 @@ int sis_unlock(){
 
 						//Volvemos al nivel de interrupcion:
 						fijar_nivel_int(nivel_int);
-						printk("\x1b[33m""#>\t""\x1b[0m""Unblock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+						printk("\x1b[33m""#>\t""\x1b[0m""Unblock %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 					}
 					//Eliminamos al propietario del mutex:
 					tabla_mutexs[des].id_proc_propietario=-1;
@@ -859,7 +860,7 @@ int sis_unlock(){
 
 					//Volvemos al nivel de interrupcion:
 					fijar_nivel_int(nivel_int);
-					printk("\x1b[33m""#>\t""\x1b[0m""Unblock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+					printk("\x1b[33m""#>\t""\x1b[0m""Unblock %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 				}
 			}
 			//Si no es propietario:
@@ -875,7 +876,7 @@ int sis_unlock(){
 		return -4;
 	}
 
-	printk("\x1b[33m""#>\t""\x1b[0m""Unlock: des->%d, proc_id->%d (B:%d)\n",des,p_proc_actual->id,tabla_mutexs[des].estado);
+	printk("\x1b[33m""#>\t""\x1b[0m""Unlock %s: des->%d, proc_id->%d (B:%d)\n",tabla_mutexs[des].nombre,des,p_proc_actual->id,tabla_mutexs[des].estado);
 	return 0;
 }
 /*I. Funcion que cierra el mutex pasandole el id del mutex */

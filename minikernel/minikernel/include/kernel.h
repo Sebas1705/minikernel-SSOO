@@ -59,12 +59,11 @@ typedef struct{
 typedef struct MUTEX_t *MUTEXptr;
 
 typedef struct MUTEX_t { 
-	char *nombre;
+	char nombre[MAX_NOM_MUT];
 	int tipo;
 	int estado; /* 0-No bloqueado, 1-Bloqueado, 1o> - Bloqueado mas de una vez*/
 	int creado; /* 0-No creado, 1-Creado*/
 	int abierto;/* 0-Cerrado, 1-Abierto*/
-	int nProcesosBloqueados;
 	int id_proc_propietario;
 	lista_BCPs procesos_bloqueados_lock;
 } MUTEX;
